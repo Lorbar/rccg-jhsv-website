@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story — Jesus House Silicon Valley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0b09; --off-black: #1a1612; --dark: #211d19; --mid: #4a4340;
+    --cream: #f5f0e8; --off-white: #faf8f4;
+    --gold: #7B3FA0; --gold-light: #A97CC5; --gold-dark: #4F2275;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--off-white); color: var(--off-black); }
+
+  nav {
+    background: var(--black); padding: 0 48px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .nav-logo { text-decoration: none; }
+  .nav-logo-top { font-family: var(--serif); font-size: 17px; font-weight: 600; color: #fff; display: block; }
+  .nav-logo-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-top: 2px; }
+  .nav-back { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .story-hero {
+    position: relative; min-height: 520px; display: flex; align-items: flex-end;
+    overflow: hidden;
+  }
+  .story-hero-bg {
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1600288480699-0b0d8a456dd8?auto=format&w=1800&q=85&fit=crop') center 30%/cover no-repeat;
+  }
+  .story-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,11,9,0.92) 0%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.2) 100%);
+  }
+  .story-hero-content {
+    position: relative; z-index: 2; padding: 80px 80px 72px; max-width: 800px;
+  }
+  .page-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .story-hero-title {
+    font-family: var(--serif); font-size: clamp(44px, 5.5vw, 72px); color: #fff;
+    font-weight: 700; line-height: 1.08; margin-bottom: 20px;
+  }
+  .story-hero-title em { font-style: italic; color: var(--gold-light); }
+  .story-hero-subtitle { font-size: 18px; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 560px; }
+
+  /* STAT BAR */
+  .stat-bar {
+    background: var(--gold); padding: 28px 80px;
+    display: flex; gap: 0; justify-content: space-between; align-items: center;
+  }
+  .stat-item { text-align: center; flex: 1; }
+  .stat-item + .stat-item { border-left: 1px solid rgba(255,255,255,0.2); }
+  .stat-num { font-family: var(--serif); font-size: 36px; font-weight: 700; color: #fff; line-height: 1; }
+  .stat-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-top: 6px; }
+
+  /* BODY */
+  .story-body { max-width: 1100px; margin: 0 auto; padding: 96px 80px; }
+
+  /* ORIGIN SECTION */
+  .origin-section {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 96px;
+  }
+  .origin-image {
+    aspect-ratio: 4/5; background: url('uploads/A7407558-Edit.jpg') center top/cover no-repeat;
+    position: relative;
+  }
+  .origin-image::after {
+    content: ''; position: absolute; bottom: -20px; right: -20px;
+    width: 60%; height: 60%; border: 3px solid var(--gold); z-index: -1;
+  }
+  .section-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-heading {
+    font-family: var(--serif); font-size: clamp(28px, 3vw, 42px); font-weight: 700;
+    color: var(--off-black); line-height: 1.15; margin-bottom: 24px;
+  }
+  .section-heading em { font-style: italic; }
+  .gold-rule { width: 48px; height: 3px; background: var(--gold); margin-bottom: 28px; }
+  .body-text { font-size: 16px; color: #555; line-height: 1.85; margin-bottom: 20px; }
+
+  /* TIMELINE */
+  .timeline-section { margin-bottom: 96px; }
+  .timeline-title { font-family: var(--serif); font-size: 36px; font-weight: 700; color: var(--off-black); margin-bottom: 56px; }
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: var(--gold); }
+  .timeline-item { position: relative; margin-bottom: 48px; }
+  .timeline-dot {
+    position: absolute; left: -48px; top: 4px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--gold); border: 3px solid var(--off-white); box-shadow: 0 0 0 2px var(--gold);
+  }
+  .timeline-year { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-dark); margin-bottom: 8px; }
+  .timeline-event { font-family: var(--serif); font-size: 20px; font-weight: 600; color: var(--off-black); margin-bottom: 8px; }
+  .timeline-desc { font-size: 14px; color: #666; line-height: 1.7; max-width: 600px; }
+
+  /* MISSION SECTION */
+  .mission-section {
+    background: var(--dark); border-radius: 8px; padding: 72px 80px;
+    margin-bottom: 96px; position: relative; overflow: hidden;
+  }
+  .mission-section::before {
+    content: '"'; position: absolute; top: -20px; left: 40px;
+    font-family: var(--serif); font-size: 240px; color: rgba(255,255,255,0.03); line-height: 1;
+    pointer-events: none;
+  }
+  .mission-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .mission-quote {
+    font-family: var(--serif); font-size: clamp(22px, 2.5vw, 32px); color: #fff;
+    font-style: italic; line-height: 1.5; margin-bottom: 24px; max-width: 760px;
+  }
+  .mission-cite { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+
+  /* VALUES */
+  .values-section { margin-bottom: 80px; }
+  .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 48px; }
+  .value-card { background: #fff; border: 1px solid rgba(0,0,0,0.07); padding: 36px 28px; border-top: 3px solid var(--gold); }
+  .value-num { font-family: var(--serif); font-size: 40px; font-weight: 700; color: var(--cream); line-height: 1; margin-bottom: 16px; }
+  .value-title { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--off-black); margin-bottom: 12px; }
+  .value-desc { font-size: 14px; color: #666; line-height: 1.7; }
+
+  /* CTA */
+  .story-cta { text-align: center; padding: 64px 0 0; border-top: 1px solid rgba(0,0,0,0.08); }
+  .story-cta h3 { font-family: var(--serif); font-size: 32px; font-weight: 700; margin-bottom: 16px; }
+  .story-cta p { font-size: 16px; color: #666; margin-bottom: 32px; }
+  .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { display: inline-flex; align-items: center; gap: 10px; background: var(--gold);
+    color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; padding: 16px 32px; border-radius: 2px; transition: background 0.2s; }
+  .btn-primary:hover { background: var(--gold-light); }
+  .btn-outline { display: inline-flex; align-items: center; gap: 10px; background: transparent;
+    color: var(--off-black); border: 1px solid rgba(0,0,0,0.2); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 16px 32px;
+    border-radius: 2px; transition: all 0.2s; }
+  .btn-outline:hover { border-color: var(--off-black); background: var(--off-black); color: #fff; }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .story-hero-content { padding: 64px 32px 56px; }
+    .stat-bar { padding: 24px 32px; gap: 16px; flex-wrap: wrap; }
+    .story-body { padding: 64px 32px; }
+    .origin-section { grid-template-columns: 1fr; gap: 48px; }
+    .origin-image { aspect-ratio: 3/2; }
+    .origin-image::after { display: none; }
+    .mission-section { padding: 48px 36px; }
+    .values-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .story-body { padding: 48px 24px; }
+    .stat-bar { flex-direction: column; gap: 24px; }
+    .stat-item + .stat-item { border-left: none; border-top: 1px solid rgba(0,0,0,0.15); padding-top: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Jesus House</span>
+    <span class="nav-logo-sub">Silicon Valley · San Jose, CA</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<!-- HERO -->
+<div class="story-hero">
+  <div class="story-hero-bg"></div>
+  <div class="story-hero-overlay"></div>
+  <div class="story-hero-content">
+    <p class="page-tag">Our Story</p>
+    <h1 class="story-hero-title">Rooted in Faith,<br>Growing in the <em>Heart of Silicon Valley</em></h1>
+    <p class="story-hero-subtitle">From a small gathering of believers to a vibrant, multicultural congregation — this is the story of what God has done through Jesus House Silicon Valley.</p>
+  </div>
+</div>
+
+<!-- STAT BAR -->
+<div class="stat-bar">
+  <div class="stat-item">
+    <div class="stat-num">12+</div>
+    <div class="stat-label">Years in Silicon Valley</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">RCCG</div>
+    <div class="stat-label">Global Network</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">San Jose</div>
+    <div class="stat-label">Home Base</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1</div>
+    <div class="stat-label">Mission: Transform Lives</div>
+  </div>
+</div>
+
+<div class="story-body">
+
+  <!-- ORIGIN -->
+  <div class="origin-section">
+    <div class="origin-image"></div>
+    <div>
+      <p class="section-tag">How It Began</p>
+      <h2 class="section-heading">A Seed Planted<br>in <em>Silicon Valley</em></h2>
+      <div class="gold-rule"></div>
+      <p class="body-text">Jesus House Silicon Valley began as a small, faith-filled gathering of believers who believed that God had a purpose for His church in the heart of the Bay Area. What started as a handful of people meeting together in a living room grew into something far greater than anyone could have imagined.</p>
+      <p class="body-text">Led by a conviction that the people of Silicon Valley — one of the most diverse and influential regions on earth — needed a place to encounter the living God, the founders of this church stepped out in faith and planted a seed that has been growing ever since.</p>
+      <p class="body-text">Today, Jesus House Silicon Valley stands as a testament to God's faithfulness — a Spirit-filled community rooted in the Word, committed to worship, and dedicated to transforming lives one by one.</p>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div class="timeline-section">
+    <h2 class="timeline-title">A Journey of Faithfulness</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">The Beginning</p>
+        <h3 class="timeline-event">The Church is Founded</h3>
+        <p class="timeline-desc">A small group of believers, united by faith and a vision for Silicon Valley, gathered together for the first time under the banner of the Redeemed Christian Church of God. The foundation was laid — not just of a local assembly, but of a family.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">Early Growth</p>
+        <h3 class="timeline-event">Taking Root in San Jose</h3>
+        <p class="timeline-desc">As the congregation grew, so did its impact. Families joined, lives were changed, and the church began to put down deep roots in the San Jose community. Sunday services grew in attendance and fervour, and the first outreach programmes were launched.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">Expansion</p>
+        <h3 class="timeline-event">A Home on Piercy Road</h3>
+        <p class="timeline-desc">The church found its home at 474 Piercy Road, San Jose — a base from which to worship, disciple, and reach out to the surrounding Bay Area. The new location opened the door for expanded programmes, conferences, and ministry outreach.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">Flourishing</p>
+        <h3 class="timeline-event">Annual Conferences & Wider Impact</h3>
+        <p class="timeline-desc">The He-Motion and Triumphant Women conferences became landmark events on the Bay Area Christian calendar. Through the Shepherds Care Foundation, the church extended practical compassion into the broader community, impacting lives well beyond its walls.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <p class="timeline-year">Today</p>
+        <h3 class="timeline-event">12 Years and Still Growing</h3>
+        <p class="timeline-desc">Over twelve years on, Jesus House Silicon Valley is a thriving, multicultural family of believers — worshipping together, growing in the Word, and making a real difference in Silicon Valley and beyond. The best is still ahead.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION QUOTE -->
+  <div class="mission-section">
+    <p class="mission-tag">Our Heart</p>
+    <p class="mission-quote">"We believe every person who walks through our doors carries a unique destiny. Our mission is to help you discover it, develop it, and deploy it for God's glory and the good of this city."</p>
+    <p class="mission-cite">— Pastor Bayo Asogba, Senior Pastor</p>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values-section">
+    <p class="section-tag">What We Stand For</p>
+    <h2 class="section-heading">Built on These<br><em>Foundations</em></h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3 class="value-title">The Word of God</h3>
+        <p class="value-desc">Scripture is our foundation. Every sermon, every programme, and every decision is rooted in the truth of God's Word, applied practically to everyday life in Silicon Valley.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h3 class="value-title">Spirit-Led Worship</h3>
+        <p class="value-desc">We believe in the power of authentic, Spirit-filled worship. We pursue the presence of God in every gathering, creating space for transformation, healing, and encounter.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h3 class="value-title">Community & Family</h3>
+        <p class="value-desc">We are more than a congregation — we are a family. We do life together, carry each other's burdens, celebrate victories, and support one another through every season.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">04</div>
+        <h3 class="value-title">Raising Leaders</h3>
+        <p class="value-desc">From the LRPM leadership programme to youth discipleship, we are committed to identifying, equipping, and releasing the next generation of God-honouring leaders.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">05</div>
+        <h3 class="value-title">Serving Our City</h3>
+        <p class="value-desc">Through the Shepherds Care Foundation and community outreach, we extend the love of Christ beyond our walls — meeting practical needs and sharing the hope of the gospel.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">06</div>
+        <h3 class="value-title">Global Connection</h3>
+        <p class="value-desc">As part of the Redeemed Christian Church of God — one of the world's largest church networks — we are connected to a global family and a shared mission to take the gospel to the ends of the earth.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="story-cta">
+    <h3>Become Part of the Story</h3>
+    <p>God is still writing the next chapter. We'd love for you to be part of it.</p>
+    <div class="cta-buttons">
+      <a href="index.html#visit" class="btn-primary">Plan a Visit</a>
+      <a href="pastors.html" class="btn-outline">Meet Our Pastors</a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

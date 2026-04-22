@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Pastors — Jesus House Silicon Valley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0b09; --off-black: #1a1612; --dark: #211d19; --mid: #4a4340;
+    --cream: #f5f0e8; --off-white: #faf8f4;
+    --gold: #7B3FA0; --gold-light: #A97CC5; --gold-dark: #4F2275;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--off-white); color: var(--off-black); }
+
+  /* NAV */
+  nav {
+    background: var(--black); padding: 0 48px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .nav-logo { text-decoration: none; }
+  .nav-logo-top { font-family: var(--serif); font-size: 17px; font-weight: 600; color: #fff; display: block; }
+  .nav-logo-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-top: 2px; }
+  .nav-back { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s; }
+  .nav-back:hover { color: var(--gold-light); }
+
+  /* PAGE HERO */
+  .page-hero {
+    background: var(--dark); padding: 80px 80px 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .page-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; }
+  .page-title { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); color: #fff;
+    font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
+  .page-title em { font-style: italic; color: var(--gold-light); }
+  .page-subtitle { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.7; }
+
+  /* LEAD PASTORS */
+  .lead-section { padding: 96px 80px; }
+  .lead-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto;
+  }
+
+  .pastor-card { display: grid; grid-template-columns: 1fr; }
+  .pastor-photo-wrap {
+    position: relative; aspect-ratio: 4/5; overflow: hidden; margin-bottom: 36px;
+  }
+  .pastor-photo {
+    width: 100%; height: 100%; object-fit: cover; object-position: top;
+    transition: transform 0.6s ease;
+  }
+  .pastor-photo-wrap:hover .pastor-photo { transform: scale(1.03); }
+  .pastor-photo-accent {
+    position: absolute; bottom: -2px; left: 0; right: 0; height: 4px; background: var(--gold);
+  }
+  .pastor-role-tag {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .pastor-name {
+    font-family: var(--serif); font-size: clamp(28px, 3vw, 40px); font-weight: 700;
+    color: var(--off-black); line-height: 1.15; margin-bottom: 20px;
+  }
+  .pastor-name em { font-style: italic; }
+  .pastor-divider {
+    width: 48px; height: 2px; background: var(--gold); margin-bottom: 24px;
+  }
+  .pastor-bio {
+    font-size: 15px; color: #555; line-height: 1.85; margin-bottom: 28px;
+  }
+  .pastor-verse {
+    background: var(--cream); border-left: 3px solid var(--gold);
+    padding: 20px 24px; font-family: var(--serif); font-size: 15px;
+    font-style: italic; color: var(--off-black); line-height: 1.7;
+  }
+  .pastor-verse cite { display: block; font-family: var(--sans); font-style: normal;
+    font-size: 11px; font-weight: 600; letter-spacing: 0.12em; color: var(--gold-dark);
+    text-transform: uppercase; margin-top: 10px; }
+
+  /* MINISTERS SECTION */
+  .ministers-section {
+    background: var(--dark); padding: 96px 80px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .ministers-header { max-width: 1200px; margin: 0 auto 56px; }
+  .ministers-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px; }
+  .ministers-title { font-family: var(--serif); font-size: 36px; color: #fff; font-weight: 700; }
+  .ministers-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px; max-width: 1200px; margin: 0 auto;
+  }
+  .minister-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07);
+    padding: 32px 24px; text-align: center; transition: background 0.2s;
+  }
+  .minister-card:hover { background: rgba(255,255,255,0.07); }
+  .minister-avatar {
+    width: 88px; height: 88px; border-radius: 50%; background: rgba(255,255,255,0.08)
+    center/cover no-repeat; margin: 0 auto 16px;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+  .minister-name { font-family: var(--serif); font-size: 17px; color: #fff; margin-bottom: 6px; }
+  .minister-role { font-size: 11px; color: rgba(255,255,255,0.4); letter-spacing: 0.08em; text-transform: uppercase; }
+
+  /* BACK */
+  .back-section { padding: 64px 80px; text-align: center; }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold);
+    color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; padding: 16px 32px;
+    border-radius: 2px; transition: background 0.2s; }
+  .btn:hover { background: var(--gold-light); }
+
+  @media (max-width: 900px) {
+    .lead-grid { grid-template-columns: 1fr; gap: 64px; }
+    .lead-section { padding: 64px 32px; }
+    .ministers-section { padding: 64px 32px; }
+    .page-hero { padding: 56px 32px 48px; }
+    .back-section { padding: 48px 32px; }
+    nav { padding: 0 24px; }
+  }
+  @media (max-width: 600px) {
+    .lead-section { padding: 48px 24px; }
+    .ministers-section { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Jesus House</span>
+    <span class="nav-logo-sub">Silicon Valley · San Jose, CA</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-tag">Leadership</p>
+  <h1 class="page-title">Meet Our <em>Pastors</em></h1>
+  <p class="page-subtitle">Shepherds called and appointed to lead, serve, and equip the people of Jesus House Silicon Valley.</p>
+</div>
+
+<!-- LEAD PASTORS -->
+<div class="lead-section">
+  <div class="lead-grid">
+
+    <!-- PASTOR BAYO -->
+    <div class="pastor-card">
+      <div class="pastor-photo-wrap">
+        <img class="pastor-photo" src="uploads/A7407558-Edit.jpg" alt="Pastor Bayo Asogba">
+        <div class="pastor-photo-accent"></div>
+      </div>
+      <p class="pastor-role-tag">Senior Pastor</p>
+      <h2 class="pastor-name">Pastor Bayo<br><em>Asogba</em></h2>
+      <div class="pastor-divider"></div>
+      <p class="pastor-bio">Pastor Bayo Asogba is the Senior Pastor of RCCG Jesus House Silicon Valley, San Jose, California. He is a Spirit-filled servant of God with a heart for the people of the Bay Area and beyond. Under his leadership, the church has grown into a vibrant, multicultural community committed to worship, the Word, and transforming lives for the glory of God.</p>
+      <p class="pastor-bio">He is passionate about equipping every believer to discover their God-given purpose, and his teaching ministry is marked by clarity, depth, and practical application of Scripture.</p>
+      <div class="pastor-verse">
+        "We believe every person who walks through our doors carries a unique destiny. Our mission is to help you discover it, develop it, and deploy it for God's glory and the good of this city."
+        <cite>— Pastor Bayo Asogba</cite>
+      </div>
+    </div>
+
+    <!-- PASTOR MRS YEMISI -->
+    <div class="pastor-card">
+      <div class="pastor-photo-wrap">
+        <img class="pastor-photo" src="uploads/A7407728-Edit.jpg" alt="Pastor Mrs Yemisi Asogba" style="object-position: top center;">
+        <div class="pastor-photo-accent"></div>
+      </div>
+      <p class="pastor-role-tag">Pastor (Women's Ministry)</p>
+      <h2 class="pastor-name">Pastor Mrs Yemisi<br><em>Asogba</em></h2>
+      <div class="pastor-divider"></div>
+      <p class="pastor-bio">Pastor Mrs Yemisi Asogba serves alongside her husband as a dedicated minister and shepherd at RCCG Jesus House Silicon Valley. She leads the women's ministry with passion and grace, championing the spiritual growth, healing, and empowerment of women in the church and community.</p>
+      <p class="pastor-bio">Known for her warmth, wisdom, and prophetic insight, Pastor Yemisi is a pillar of strength and encouragement to the congregation. She also leads the Triumphant Women Annual Conference — a gathering that has impacted the lives of many women across the Bay Area.</p>
+      <div class="pastor-verse">
+        "Every woman is a vessel of honour. God has placed gifts, grace, and greatness within you — it's time to arise and walk in it."
+        <cite>— Pastor Mrs Yemisi Asogba</cite>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MINISTERS -->
+<div class="ministers-section">
+  <div class="ministers-header">
+    <p class="ministers-tag">The Team</p>
+    <h2 class="ministers-title">Our Ministers</h2>
+  </div>
+  <div class="ministers-grid">
+    <div class="minister-card">
+      <div class="minister-avatar" style="background-image:url('uploads/A7407021-Edit.jpg')"></div>
+      <div class="minister-name">Minister</div>
+      <div class="minister-role">Worship & Music</div>
+    </div>
+    <div class="minister-card">
+      <div class="minister-avatar" style="background-image:url('uploads/A7407599-Edit.jpg')"></div>
+      <div class="minister-name">Minister</div>
+      <div class="minister-role">Children's Church</div>
+    </div>
+    <div class="minister-card">
+      <div class="minister-avatar" style="background-color:rgba(255,255,255,0.08)"></div>
+      <div class="minister-name">Minister</div>
+      <div class="minister-role">Youth Ministry</div>
+    </div>
+    <div class="minister-card">
+      <div class="minister-avatar" style="background-color:rgba(255,255,255,0.08)"></div>
+      <div class="minister-name">Minister</div>
+      <div class="minister-role">Outreach & Missions</div>
+    </div>
+  </div>
+</div>
+
+<div class="back-section">
+  <a href="index.html" class="btn">
+    <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+    Back to Home
+  </a>
+</div>
+
+</body>
+</html>

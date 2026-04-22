@@ -1,0 +1,2245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jesus House Silicon Valley — San Jose, CA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #0d0b09;
+    --off-black: #1a1612;
+    --dark: #211d19;
+    --mid: #4a4340;
+    --light-mid: #8a8078;
+    --cream: #f5f0e8;
+    --off-white: #faf8f4;
+    --gold: #7B3FA0;
+    --gold-light: #A97CC5;
+    --gold-dark: #4F2275;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --nav-h: 80px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--off-white);
+    color: var(--off-black);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    transition: background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(13, 11, 9, 0.88);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .nav-logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    text-decoration: none;
+  }
+  .nav-logo-top {
+    font-family: var(--serif);
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.01em;
+  }
+  .nav-logo-sub {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--gold-light);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold);
+    color: #fff !important;
+    padding: 10px 22px !important;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em !important;
+    transition: background 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold-light) !important; transform: translateY(-1px); }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    background: var(--black);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--serif);
+    font-size: 32px;
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    background: url('https://images.unsplash.com/photo-1600288480699-0b0d8a456dd8?auto=format&w=1800&q=85&fit=crop') center center/cover no-repeat;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(13,11,9,0.9) 0%, rgba(13,11,9,0.55) 55%, rgba(13,11,9,0.8) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 80px;
+    max-width: 800px;
+  }
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s forwards;
+  }
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s forwards;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+  .hero-subtitle {
+    font-family: var(--sans);
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s forwards;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s forwards;
+  }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 2px;
+    transition: background 0.25s, transform 0.25s;
+  }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: #fff;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 16px 32px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 2px;
+    transition: border-color 0.25s, background 0.25s, transform 0.25s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeUp 1s 1.2s forwards;
+  }
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── SERVICE BAR ── */
+  #services-bar {
+    background: var(--dark);
+    padding: 36px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .service-bar-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+  .service-bar-times {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+  .service-time {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .service-time-day {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .service-time-hour {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+  }
+  .service-divider {
+    width: 1px;
+    height: 48px;
+    background: rgba(255,255,255,0.1);
+  }
+  .service-location {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .service-location-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .service-location-addr {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 400;
+  }
+  .service-bar-cta {
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION SHARED ── */
+  section { overflow: hidden; }
+  .section-tag {
+    font-family: var(--sans);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--off-black);
+  }
+  .section-title.light { color: #fff; }
+  .section-body {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--mid);
+    font-weight: 300;
+  }
+  .section-body.light { color: rgba(255,255,255,0.65); }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(36px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+  /* ── WHO WE ARE ── */
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+  }
+  .about-image {
+    position: relative;
+    min-height: 500px;
+    background: url('https://images.unsplash.com/photo-1529070538774-1843cb3265df?auto=format&w=900&q=85&fit=crop') center/cover no-repeat;
+    overflow: hidden;
+  }
+  .about-image-badge {
+    position: absolute;
+    bottom: 40px;
+    right: -24px;
+    background: var(--gold);
+    padding: 24px 32px;
+    z-index: 2;
+  }
+  .about-image-badge-num {
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1;
+  }
+  .about-image-badge-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.7;
+    margin-top: 4px;
+  }
+  .about-content {
+    background: var(--off-white);
+    padding: 100px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+  .about-values {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 8px;
+  }
+  .about-value {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .about-value-icon {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .about-value-icon svg { width: 14px; height: 14px; fill: var(--gold); }
+  .about-value-text h4 {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--off-black);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
+  }
+  .about-value-text p {
+    font-size: 14px;
+    color: var(--light-mid);
+    line-height: 1.6;
+  }
+
+  /* ── SERMON ── */
+  #sermon {
+    background: var(--off-black);
+    padding: 100px 80px;
+  }
+  .sermon-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .sermon-featured {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 2px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .sermon-video {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: url('https://images.unsplash.com/photo-1574587497813-d2be71b3daf5?auto=format&w=900&q=85&fit=crop') center/cover no-repeat;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  .sermon-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 72px;
+    height: 72px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .sermon-play-btn:hover { background: var(--gold); transform: translate(-50%, -50%) scale(1.08); }
+  .sermon-play-btn svg { width: 24px; height: 24px; fill: #fff; margin-left: 3px; }
+  .sermon-series-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: var(--gold);
+    color: var(--black);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+    z-index: 2;
+  }
+  .sermon-info {
+    padding: 48px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+  .sermon-series-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .sermon-title {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .sermon-speaker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sermon-speaker-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--mid);
+    border: 2px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+  }
+  .sermon-speaker-info { display: flex; flex-direction: column; gap: 2px; }
+  .sermon-speaker-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+  .sermon-speaker-role {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.06em;
+  }
+  .sermon-meta {
+    display: flex;
+    gap: 20px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .sermon-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+  }
+  .sermon-meta-item svg { width: 14px; height: 14px; }
+  .sermon-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn-sermon {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn-sermon-primary { background: var(--gold); color: #fff; }
+  .btn-sermon-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-sermon-ghost { background: transparent; color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.15); }
+  .btn-sermon-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .sermon-archive {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .sermon-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 32px;
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .sermon-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.12); }
+  .sermon-card-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #111;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-position: center;
+  }
+  .sermon-card-title {
+    font-family: var(--serif);
+    font-size: 18px;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+  .sermon-card-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.08em;
+  }
+  .sermon-card-play {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .sermon-card:hover .sermon-card-play { background: var(--gold); }
+  .sermon-card-play svg { width: 12px; height: 12px; fill: #fff; margin-left: 2px; }
+
+  /* ── EVENTS ── */
+  #events {
+    background: var(--cream);
+    padding: 100px 80px;
+  }
+  .events-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 56px;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .events-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .event-card {
+    background: #fff;
+    border-radius: 2px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+  }
+  .event-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(0,0,0,0.12); }
+  .event-card-image {
+    aspect-ratio: 16/9;
+    background: repeating-linear-gradient(-45deg, #e0d8cc 0, #e0d8cc 15px, #d5cbbf 15px, #d5cbbf 30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 10px;
+    color: rgba(0,0,0,0.2);
+    letter-spacing: 0.06em;
+    position: relative;
+  }
+  .event-card-date {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--gold);
+    padding: 8px 12px;
+    text-align: center;
+    line-height: 1;
+  }
+  .event-card-date-day {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--black);
+  }
+  .event-card-date-month {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--black);
+    opacity: 0.6;
+  }
+  .event-card-body {
+    padding: 28px 28px 32px;
+  }
+  .event-card-category {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 10px;
+  }
+  .event-card-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--off-black);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .event-card-desc {
+    font-size: 14px;
+    color: var(--light-mid);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .event-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 16px;
+    border-top: 1px solid #f0ece4;
+  }
+  .event-card-time {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--light-mid);
+  }
+  .event-card-time svg { width: 14px; height: 14px; }
+  .event-link {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--off-black);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.2s;
+  }
+  .event-link:hover { color: var(--gold-dark); }
+  .event-link svg { width: 14px; height: 14px; }
+
+  /* ── MINISTRIES ── */
+  #ministries {
+    padding: 100px 80px;
+    background: var(--off-white);
+  }
+  .ministries-header {
+    text-align: center;
+    max-width: 560px;
+    margin: 0 auto 64px;
+  }
+  .ministries-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+  .ministry-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .ministry-card-bg {
+    position: absolute;
+    inset: 0;
+    transition: transform 0.5s ease;
+  }
+  .ministry-card:hover .ministry-card-bg { transform: scale(1.05); }
+  .ministry-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(13,11,9,0.92) 0%, rgba(13,11,9,0.2) 60%, transparent 100%);
+    transition: background 0.3s;
+  }
+  .ministry-card:hover .ministry-card-overlay {
+    background: linear-gradient(to top, rgba(13,11,9,0.96) 0%, rgba(13,11,9,0.5) 60%, rgba(13,11,9,0.1) 100%);
+  }
+  .ministry-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 32px 28px;
+    z-index: 2;
+  }
+  .ministry-icon {
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .ministry-icon svg { width: 16px; height: 16px; fill: var(--gold); }
+  .ministry-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+  .ministry-desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s;
+  }
+  .ministry-card:hover .ministry-desc { max-height: 80px; }
+  .ministry-arrow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .ministry-card:hover .ministry-arrow { opacity: 1; }
+  .ministry-arrow svg { width: 14px; height: 14px; }
+
+  /* ── VISIT ── */
+  #visit {
+    background: var(--off-black);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .visit-map {
+    aspect-ratio: 4/3;
+    background: repeating-linear-gradient(
+      45deg,
+      #1a1612 0, #1a1612 20px,
+      #211d19 20px, #211d19 40px
+    );
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .visit-content { display: flex; flex-direction: column; gap: 24px; }
+  .visit-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .visit-info-item { display: flex; flex-direction: column; gap: 6px; }
+  .visit-info-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .visit-info-value {
+    font-size: 15px;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+  }
+  .visit-form {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .visit-form h3 {
+    font-family: var(--serif);
+    font-size: 22px;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .form-field input, .form-field select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 2px;
+    padding: 12px 16px;
+    font-family: var(--sans);
+    font-size: 14px;
+    color: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-field input::placeholder { color: rgba(255,255,255,0.25); }
+  .form-field input:focus, .form-field select:focus { border-color: var(--gold); }
+  .form-field select { appearance: none; cursor: pointer; }
+  .form-field select option { background: var(--off-black); }
+  .btn-form-submit {
+    background: var(--gold);
+    color: var(--black);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 16px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    width: 100%;
+    margin-top: 4px;
+  }
+  .btn-form-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ── GIVE ── */
+  #give {
+    background: var(--cream);
+    padding: 100px 80px;
+    text-align: center;
+  }
+  .give-inner {
+    max-width: 640px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+  }
+  .give-verse {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-style: italic;
+    color: var(--mid);
+    line-height: 1.7;
+    max-width: 480px;
+  }
+  .give-verse cite {
+    display: block;
+    font-style: normal;
+    font-size: 13px;
+    color: var(--gold-dark);
+    letter-spacing: 0.1em;
+    font-family: var(--sans);
+    font-weight: 600;
+    margin-top: 12px;
+  }
+  .give-options {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── PASTOR / LEADERSHIP QUOTE ── */
+  #pastor-quote {
+    background: var(--off-black);
+    padding: 100px 80px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .pastor-image {
+    position: relative;
+  }
+  .pastor-image-frame {
+    aspect-ratio: 3/4;
+    background: repeating-linear-gradient(
+      60deg,
+      #1a1612 0, #1a1612 20px,
+      #211d19 20px, #211d19 40px
+    );
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.12);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.06);
+    position: relative;
+  }
+  .pastor-image-frame::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: -16px;
+    right: 16px;
+    bottom: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 2px;
+    pointer-events: none;
+  }
+  .pastor-quote-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .pastor-quote-mark {
+    font-family: var(--serif);
+    font-size: 120px;
+    color: var(--gold);
+    line-height: 0.6;
+    opacity: 0.4;
+  }
+  .pastor-quote-text {
+    font-family: var(--serif);
+    font-size: clamp(24px, 2.5vw, 36px);
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .pastor-attribution {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .pastor-name {
+    font-family: var(--sans);
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+  }
+  .pastor-role {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black);
+    padding: 80px 80px 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 64px;
+    margin-bottom: 64px;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .footer-logo-top {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .footer-logo-sub {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: -12px;
+  }
+  .footer-tagline {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+  .footer-social a {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .footer-social a:hover { border-color: var(--gold); background: rgba(255,255,255,0.04); }
+  .footer-social svg { width: 14px; height: 14px; fill: rgba(255,255,255,0.5); }
+  .footer-social a:hover svg { fill: var(--gold); }
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 24px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--gold-light); }
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-copyright {
+    font-size: 13px;
+    color: rgba(255,255,255,0.25);
+  }
+  .footer-bottom-links {
+    display: flex;
+    gap: 24px;
+  }
+  .footer-bottom-links a {
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
+
+  /* ── SERMON MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(0,0,0,0.9);
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--off-black);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    max-width: 720px;
+    width: 100%;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+  }
+  .modal-video {
+    aspect-ratio: 16/9;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 18px;
+    color: rgba(255,255,255,0.3);
+    font-style: italic;
+  }
+  .modal-body { padding: 32px; }
+  .modal-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .modal-meta { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 24px; }
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    background: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.1); }
+  .modal-overlay { position: relative; }
+
+  /* ── EVENT MODALS ── */
+  .event-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 200;
+    background: rgba(13,11,9,0.85); backdrop-filter: blur(8px);
+    overflow-y: auto; padding: 40px 24px;
+    align-items: flex-start; justify-content: center;
+  }
+  .event-modal-overlay.open { display: flex; }
+  .event-modal {
+    background: var(--off-white); max-width: 680px; width: 100%;
+    border-radius: 4px; overflow: hidden; position: relative;
+    animation: fadeUp 0.35s ease; margin: auto;
+  }
+  .event-modal-hero {
+    height: 260px; background-size: cover; background-position: center;
+    position: relative;
+  }
+  .event-modal-hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(13,11,9,0.7) 0%, transparent 60%);
+  }
+  .event-modal-hero-tag {
+    position: absolute; bottom: 24px; left: 32px;
+    font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); background: rgba(13,11,9,0.6); padding: 6px 12px; border-radius: 2px;
+  }
+  .event-modal-body { padding: 40px 40px 48px; }
+  .event-modal-title {
+    font-family: var(--serif); font-size: 28px; color: var(--off-black);
+    font-weight: 700; line-height: 1.2; margin-bottom: 20px;
+  }
+  .event-modal-desc {
+    font-size: 15px; color: #444; line-height: 1.8; margin-bottom: 28px;
+  }
+  .event-modal-details { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+  .event-modal-detail-item { background: var(--cream); padding: 16px 20px; border-radius: 4px; }
+  .event-modal-detail-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 4px;
+  }
+  .event-modal-detail-value { font-size: 14px; color: var(--off-black); font-weight: 500; }
+  .event-modal-close {
+    position: absolute; top: 16px; right: 16px; width: 36px; height: 36px;
+    background: rgba(13,11,9,0.5); border: none; border-radius: 50%;
+    color: #fff; font-size: 18px; cursor: pointer; display: flex;
+    align-items: center; justify-content: center; transition: background 0.2s;
+  }
+  .event-modal-close:hover { background: rgba(13,11,9,0.8); }
+  @media (max-width: 600px) {
+    .event-modal-body { padding: 28px 24px 36px; }
+    .event-modal-details { grid-template-columns: 1fr; }
+  }
+
+  /* ── TWEAKS PANEL ── */
+  #tweaks-panel {
+    display: none;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 300;
+    background: var(--off-black);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 24px;
+    width: 280px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+  }
+  #tweaks-panel.open { display: block; }
+  .tweaks-title {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 20px;
+  }
+  .tweak-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .tweak-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .tweak-select {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: #fff;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+  }
+  .tweak-select option { background: var(--off-black); }
+  .tweak-colors {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .tweak-color {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .tweak-color.active, .tweak-color:hover { border-color: #fff; transform: scale(1.15); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.97); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    nav { padding: 0 32px; }
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    #about { grid-template-columns: 1fr; }
+    .about-image { min-height: 380px; }
+    .about-content { padding: 64px 40px; }
+    .about-image-badge { right: 24px; }
+    .sermon-featured { grid-template-columns: 1fr; }
+    .sermon-archive { grid-template-columns: 1fr 1fr; }
+    .ministries-grid { grid-template-columns: 1fr 1fr; }
+    #visit { grid-template-columns: 1fr; gap: 48px; }
+    #pastor-quote { grid-template-columns: 1fr; gap: 48px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .events-grid { grid-template-columns: 1fr 1fr; }
+    .hero-content { padding: 0 40px; }
+    #services-bar, #sermon, #events, #ministries, #visit, #give, #pastor-quote { padding: 72px 40px; }
+    footer { padding: 64px 40px 32px; }
+  }
+  @media (max-width: 640px) {
+    .hero-content { padding: 0 24px; }
+    .hero-title { font-size: 42px; }
+    #services-bar { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    .service-bar-times { flex-direction: column; gap: 20px; }
+    .service-divider { display: none; }
+    #sermon, #events, #ministries, #visit, #give, #pastor-quote { padding: 64px 24px; }
+    footer { padding: 48px 24px 24px; }
+    .sermon-archive { grid-template-columns: 1fr; }
+    .ministries-grid { grid-template-columns: 1fr; }
+    .events-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+    #visit { padding: 64px 24px; }
+    .visit-info-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .pastor-image-frame::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-top">Jesus House</span>
+    <span class="nav-logo-sub">Silicon Valley · San Jose, CA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">Who We Are</a></li>
+    <li><a href="#sermon">Messages</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#ministries">Ministries</a></li>
+    <li><a href="#visit">Visit</a></li>
+    <li><a href="#give" class="nav-cta">Give</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">Who We Are</a>
+  <a href="#sermon" onclick="closeMobile()">Messages</a>
+  <a href="#events" onclick="closeMobile()">Events</a>
+  <a href="#ministries" onclick="closeMobile()">Ministries</a>
+  <a href="#visit" onclick="closeMobile()">Visit</a>
+  <a href="#give" onclick="closeMobile()">Give</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-overlay"></div>
+  </div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Welcome to Jesus House Silicon Valley · RCCG</p>
+    <h1 class="hero-title">A Place to<br><em>Belong, Grow,</em><br>& Make a Difference</h1>
+    <p class="hero-subtitle">A Spirit-filled, multicultural community of believers in the heart of San Jose, CA — where lives are transformed, destinies are shaped, and God's love is made real.</p>
+    <div class="hero-actions">
+      <a href="#visit" class="btn-primary">
+        <svg viewBox="0 0 16 16" style="width:16px;height:16px;fill:currentColor"><path d="M8 0C5.24 0 3 2.24 3 5c0 3.75 5 11 5 11s5-7.25 5-11c0-2.76-2.24-5-5-5zm0 6.5A1.5 1.5 0 1 1 8 3.5 1.5 1.5 0 0 1 8 6.5z"/></svg>
+        Plan a Visit
+      </a>
+      <a href="#sermon" class="btn-outline">
+        <svg viewBox="0 0 16 16" style="width:16px;height:16px;fill:currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+        Watch Messages
+      </a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- SERVICE TIMES BAR -->
+<div id="services-bar">
+  <div>
+    <p class="service-bar-label">Join us for worship</p>
+    <div class="service-bar-times">
+      <div class="service-time">
+        <span class="service-time-day">Sunday School</span>
+        <span class="service-time-hour">10:00 AM</span>
+      </div>
+      <div class="service-time">
+        <span class="service-time-day">Sunday Service</span>
+        <span class="service-time-hour">10:30 AM</span>
+      </div>
+      <div class="service-divider"></div>
+      <div class="service-time">
+        <span class="service-time-day">Monday Prayerline</span>
+        <span class="service-time-hour">8:00 PM</span>
+      </div>
+      <div class="service-divider"></div>
+      <div class="service-time">
+        <span class="service-time-day">Wednesday Bible Study</span>
+        <span class="service-time-hour">7:00 PM</span>
+      </div>
+    </div>
+  </div>
+  <div class="service-location">
+    <span class="service-location-label">Location</span>
+    <span class="service-location-addr">474 Piercy Rd<br>San Jose, CA 95138</span>
+  </div>
+  <div class="service-bar-cta">
+    <a href="#visit" class="btn-primary">Get Directions</a>
+  </div>
+</div>
+
+<!-- WHO WE ARE -->
+<section id="about">
+  <div class="about-image">
+    <div class="about-image-badge reveal">
+      <div class="about-image-badge-num">12+</div>
+      <div class="about-image-badge-label">Years Serving<br>Silicon Valley</div>
+    </div>
+  </div>
+  <div class="about-content">
+    <p class="section-tag reveal">Who We Are</p>
+    <h2 class="section-title reveal reveal-delay-1">More Than a Church —<br>We're a <em>Family</em></h2>
+    <p class="section-body reveal reveal-delay-2">Jesus House Silicon Valley is a Spirit-filled, multicultural community of believers rooted in the love of Christ. We exist to connect people with God and with each other through authentic worship, biblical teaching, and transforming community.</p>
+    <div class="about-values reveal reveal-delay-3">
+      <div class="about-value">
+        <div class="about-value-icon">
+          <svg viewBox="0 0 16 16"><path d="M8 1.5a6.5 6.5 0 1 0 0 13A6.5 6.5 0 0 0 8 1.5zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm9-3.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7 7h2v4H7V7z"/></svg>
+        </div>
+        <div class="about-value-text">
+          <h4>Spirit-Led Worship</h4>
+          <p>Dynamic, passionate worship that draws you into the presence of God.</p>
+        </div>
+      </div>
+      <div class="about-value">
+        <div class="about-value-icon">
+          <svg viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg>
+        </div>
+        <div class="about-value-text">
+          <h4>Biblical Teaching</h4>
+          <p>Relevant, grounded messages that apply the Word of God to everyday life.</p>
+        </div>
+      </div>
+      <div class="about-value">
+        <div class="about-value-icon">
+          <svg viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+        </div>
+        <div class="about-value-text">
+          <h4>Real Community</h4>
+          <p>Life-giving connections through small groups, serving, and shared mission.</p>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-4">
+      <a href="our-story.html" class="btn-primary" style="display:inline-flex;margin-top:8px;">Learn Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- LATEST SERMON -->
+<section id="sermon">
+  <div class="sermon-header">
+    <div>
+      <p class="section-tag reveal">Latest Message</p>
+      <h2 class="section-title light reveal reveal-delay-1">Watch. Listen. Grow.</h2>
+    </div>
+    <a href="https://www.youtube.com/@jesushousesiliconvalleysan6808/streams" target="_blank" class="btn-outline reveal reveal-delay-2">Full Sermon Library →</a>
+  </div>
+
+  <div class="sermon-featured reveal">
+    <a href="https://www.youtube.com/watch?v=V2CM2i2F92A" target="_blank" rel="noopener"
+       style="position:relative;aspect-ratio:16/9;background:url('https://i.ytimg.com/vi/V2CM2i2F92A/hqdefault.jpg') center/cover no-repeat;display:block;overflow:hidden;text-decoration:none;">
+      <div style="position:absolute;inset:0;background:rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;transition:background 0.3s"
+           onmouseover="this.style.background='rgba(0,0,0,0.2)'" onmouseout="this.style.background='rgba(0,0,0,0.35)'">
+        <div style="width:72px;height:72px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(0,0,0,0.4)">
+          <svg viewBox="0 0 16 16" fill="#fff" style="width:28px;height:28px;margin-left:4px"><path d="M4 2l10 6-10 6V2z"/></svg>
+        </div>
+      </div>
+    </a>
+    <div class="sermon-info">
+      <p class="sermon-series-tag">Latest Sunday Service</p>
+      <h3 class="sermon-title">SUNDAY SERVICE!!!!! || 04/19/2026</h3>
+      <div class="sermon-speaker">
+        <div class="sermon-speaker-avatar" style="background:url('uploads/A7407558-Edit.jpg') center/cover no-repeat;font-size:0"></div>
+        <div class="sermon-speaker-info">
+          <span class="sermon-speaker-name">Pastor Bayo Asogba</span>
+          <span class="sermon-speaker-role">Senior Pastor · RCCG Jesus House Silicon Valley</span>
+        </div>
+      </div>
+      <div class="sermon-meta">
+        <div class="sermon-meta-item">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+          Apr 19, 2026
+        </div>
+        <div class="sermon-meta-item">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M4 2l10 6-10 6V2z"/></svg>
+          2 hr 19 min
+        </div>
+      </div>
+      <div class="sermon-actions">
+        <a class="btn-sermon btn-sermon-primary" href="https://www.youtube.com/watch?v=V2CM2i2F92A" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/></svg>
+          Watch on YouTube
+        </a>
+        <a class="btn-sermon btn-sermon-ghost" href="https://www.youtube.com/@jesushousesiliconvalleysan6808" target="_blank" rel="noopener">
+          Subscribe to Channel
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="sermon-archive">
+    <a class="sermon-card reveal" href="https://www.youtube.com/watch?v=V2CM2i2F92A" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit">
+      <div class="sermon-card-thumb" style="background-image:url('https://i.ytimg.com/vi/V2CM2i2F92A/hqdefault.jpg')"></div>
+      <div class="sermon-card-play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6V2z"/></svg></div>
+      <div class="sermon-card-title">SUNDAY SERVICE!!!!! || 04/19/2026</div>
+      <div class="sermon-card-meta">Apr 19, 2026 · 2 hr 19 min</div>
+    </a>
+    <a class="sermon-card reveal reveal-delay-1" href="https://www.youtube.com/watch?v=Q1lGw9f8sUY" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit">
+      <div class="sermon-card-thumb" style="background-image:url('https://i.ytimg.com/vi/Q1lGw9f8sUY/hqdefault.jpg')"></div>
+      <div class="sermon-card-play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6V2z"/></svg></div>
+      <div class="sermon-card-title">SUNDAY SERVICE!!!! || 04/12/2026</div>
+      <div class="sermon-card-meta">Apr 12, 2026 · 1 hr 57 min</div>
+    </a>
+    <a class="sermon-card reveal reveal-delay-2" href="https://www.youtube.com/watch?v=Kn8KrcBfKYc" target="_blank" rel="noopener" style="display:block;text-decoration:none;color:inherit">
+      <div class="sermon-card-thumb" style="background-image:url('https://i.ytimg.com/vi/Kn8KrcBfKYc/hqdefault.jpg')"></div>
+      <div class="sermon-card-play"><svg viewBox="0 0 16 16"><path d="M4 2l10 6-10 6V2z"/></svg></div>
+      <div class="sermon-card-title">EASTER SUNDAY || CELEBRATION SERVICE</div>
+      <div class="sermon-card-meta">Apr 5, 2026 · 2 hr 23 min</div>
+    </a>
+  </div>
+</section>
+
+<!-- UPCOMING EVENTS -->
+<section id="events">
+  <div class="events-header">
+    <div>
+      <p class="section-tag reveal">What's Happening</p>
+      <h2 class="section-title reveal reveal-delay-1">Upcoming Events</h2>
+    </div>
+    <a href="calendar.html" class="btn-primary reveal reveal-delay-2">View Full Calendar</a>
+  </div>
+
+  <div class="events-grid">
+    <div class="event-card reveal">
+      <div class="event-card-image" style="background:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&w=600&q=80&fit=crop') center/cover no-repeat;">
+        <div class="event-card-date">
+          <div class="event-card-date-day">TBA</div>
+          <div class="event-card-date-month">2025</div>
+        </div>
+      </div>
+      <div class="event-card-body">
+        <p class="event-card-category">Conference</p>
+        <h3 class="event-card-title">He-Motion / She-Motion — Triumphant Women Annual Conference</h3>
+        <p class="event-card-desc">Our annual men's and women's conference — a powerful gathering to ignite faith, strengthen identity, and walk in triumph.</p>
+        <div class="event-card-footer">
+          <div class="event-card-time">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+            Date TBA
+          </div>
+          <a href="#" onclick="document.getElementById('eventModal1').classList.add('open');return false;" class="event-link">
+            Learn More
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-1">
+      <div class="event-card-image" style="background:url('Picnic.png') center/cover no-repeat;">
+        <div class="event-card-date">
+          <div class="event-card-date-day">TBA</div>
+          <div class="event-card-date-month">2025</div>
+        </div>
+      </div>
+      <div class="event-card-body">
+        <p class="event-card-category">Community</p>
+        <h3 class="event-card-title">Annual Family Picnic & Community Outreach</h3>
+        <p class="event-card-desc">A day of food, fun, and fellowship for the whole family — and an opportunity to share God's love with our neighbours.</p>
+        <div class="event-card-footer">
+          <div class="event-card-time">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+            Date TBA
+          </div>
+          <a href="#" onclick="document.getElementById('eventModal2').classList.add('open');return false;" class="event-link">
+            Learn More
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="event-card reveal reveal-delay-2">
+      <div class="event-card-image" style="background:url('Prophetic.png') center/cover no-repeat;">
+        <div class="event-card-date">
+          <div class="event-card-date-day">TBA</div>
+          <div class="event-card-date-month">2025</div>
+        </div>
+      </div>
+      <div class="event-card-body">
+        <p class="event-card-category">Prayer & Prophecy</p>
+        <h3 class="event-card-title">Annual Prophetic Solution — Patmos</h3>
+        <p class="event-card-desc">"Maintain Your Steadfastness" — a focused time of prophetic prayer, breakthrough, and seeking God's word for the year ahead.</p>
+        <div class="event-card-footer">
+          <div class="event-card-time">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+            Date TBA
+          </div>
+          <a href="#" onclick="document.getElementById('eventModal3').classList.add('open');return false;" class="event-link">
+            Learn More
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MINISTRIES -->
+<section id="ministries">
+  <div class="ministries-header">
+    <p class="section-tag reveal">Get Involved</p>
+    <h2 class="section-title reveal reveal-delay-1">Find Your Place<br>to Belong</h2>
+    <p class="section-body reveal reveal-delay-2" style="margin-top:16px">Every person has a role to play. Discover the ministry where you can grow, serve, and make a lasting impact.</p>
+  </div>
+  <div class="ministries-grid">
+    <div class="ministry-card reveal">
+      <div class="ministry-card-bg" style="background:url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?auto=format&w=500&q=80&fit=crop') center/cover no-repeat"></div>
+      <div class="ministry-card-overlay"></div>
+      <div class="ministry-card-content">
+        <div class="ministry-icon">
+          <svg viewBox="0 0 16 16"><path d="M6 13c0 1.105-1.12 2-2.5 2S1 14.105 1 13c0-1.104 1.12-2 2.5-2s2.5.896 2.5 2zm9-2c0 1.105-1.12 2-2.5 2s-2.5-.895-2.5-2 1.12-2 2.5-2 2.5.895 2.5 2z"/><path fill-rule="evenodd" d="M14 11V2h1v9h-1zM6 3v10H5V3h1z"/><path d="M5 2.905a1 1 0 0 1 .9-.995l8-.8a1 1 0 0 1 1.1.995V3L5 4V2.905z"/></svg>
+        </div>
+        <h3 class="ministry-name">Choir</h3>
+        <p class="ministry-desc">Leading the congregation in Spirit-filled worship through song, harmony, and praise to God.</p>
+        <a href="join.html?ministry=Choir" class="ministry-arrow">Join Us <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg></a>
+      </div>
+    </div>
+    <div class="ministry-card reveal reveal-delay-1">
+      <div class="ministry-card-bg" style="background:url('https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&w=500&q=80&fit=crop') center/cover no-repeat"></div>
+      <div class="ministry-card-overlay"></div>
+      <div class="ministry-card-content">
+        <div class="ministry-icon">
+          <svg viewBox="0 0 16 16"><path d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2V5z"/></svg>
+        </div>
+        <h3 class="ministry-name">Media Team</h3>
+        <p class="ministry-desc">Capturing and broadcasting the gospel through video, audio, and digital content for the world to see.</p>
+        <a href="join.html?ministry=Media+Team" class="ministry-arrow">Join Us <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg></a>
+      </div>
+    </div>
+    <div class="ministry-card reveal reveal-delay-2">
+      <div class="ministry-card-bg" style="background:url('Usher.png') center/cover no-repeat"></div>
+      <div class="ministry-card-overlay"></div>
+      <div class="ministry-card-content">
+        <div class="ministry-icon">
+          <svg viewBox="0 0 16 16"><path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM8 10.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/></svg>
+        </div>
+        <h3 class="ministry-name">Welfare & Ushering</h3>
+        <p class="ministry-desc">Caring for the needs of our members and creating a warm, welcoming experience for every visitor.</p>
+        <a href="join.html?ministry=Welfare+%26+Ushering" class="ministry-arrow">Join Us <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg></a>
+      </div>
+    </div>
+    <div class="ministry-card reveal reveal-delay-3">
+      <div class="ministry-card-bg" style="background:url('https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&w=500&q=80&fit=crop') center/cover no-repeat"></div>
+      <div class="ministry-card-overlay"></div>
+      <div class="ministry-card-content">
+        <div class="ministry-icon">
+          <svg viewBox="0 0 16 16"><path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/></svg>
+        </div>
+        <h3 class="ministry-name">Outreach — Shepherds Care Foundation</h3>
+        <p class="ministry-desc">Extending God's love into our community through practical care, support, and compassionate service.</p>
+        <a href="join.html?ministry=Outreach" class="ministry-arrow">Join Us <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg></a>
+      </div>
+    </div>
+    <div class="ministry-card reveal reveal-delay-4">
+      <div class="ministry-card-bg" style="background:url('Sanctuary Helpers.png') center/cover no-repeat"></div>
+      <div class="ministry-card-overlay"></div>
+      <div class="ministry-card-content">
+        <div class="ministry-icon">
+          <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        </div>
+        <h3 class="ministry-name">Sanctuary Keepers</h3>
+        <p class="ministry-desc">Maintaining God's house with excellence — ensuring the sanctuary is a beautiful, orderly place for worship and encounter.</p>
+        <a href="join.html?ministry=Sanctuary+Keepers" class="ministry-arrow">Join Us <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PASTOR QUOTE -->
+<section id="pastor-quote">
+  <div class="pastor-image reveal">
+    <div class="pastor-image-frame" style="background:url('uploads/A7407558-Edit.jpg') center top/cover no-repeat;font-size:0"></div>
+  </div>
+  <div class="pastor-quote-content">
+    <div class="pastor-quote-mark reveal">"</div>
+    <blockquote class="pastor-quote-text reveal reveal-delay-1">
+      We believe every person who walks through our doors carries a unique destiny. Our mission is to help you discover it, develop it, and deploy it for God's glory and the good of this city.
+    </blockquote>
+    <div class="pastor-attribution reveal reveal-delay-2">
+      <span class="pastor-name">Pastor Bayo Asogba</span>
+      <span class="pastor-role">Senior Pastor · RCCG Jesus House Silicon Valley</span>
+    </div>
+    <a href="pastors.html" class="btn-outline reveal reveal-delay-3" style="display:inline-flex;width:fit-content;margin-top:8px">Meet Our Pastors →</a>
+  </div>
+</section>
+
+<!-- PLAN A VISIT -->
+<section id="visit">
+  <div class="visit-map reveal" style="background:url('https://images.unsplash.com/photo-1524813686514-a57563d77965?auto=format&w=700&q=80&fit=crop') center/cover no-repeat;font-size:0"></div>
+  <div class="visit-content">
+    <div>
+      <p class="section-tag reveal">Come as You Are</p>
+      <h2 class="section-title light reveal reveal-delay-1">Plan Your First Visit</h2>
+      <p class="section-body light reveal reveal-delay-2" style="margin-top:16px">We'd love to welcome you. Fill out the form below and our team will be in touch with everything you need to know before Sunday.</p>
+    </div>
+    <div class="visit-info-grid reveal reveal-delay-2">
+      <div class="visit-info-item">
+        <span class="visit-info-label">Address</span>
+        <span class="visit-info-value">474 Piercy Rd<br>San Jose, CA 95138</span>
+      </div>
+      <div class="visit-info-item">
+        <span class="visit-info-label">Service Times</span>
+        <span class="visit-info-value">Sun School 10 AM · Service 10:30 AM<br>Mon Prayerline 8 PM · Wed Bible Study 7 PM</span>
+      </div>
+      <div class="visit-info-item">
+        <span class="visit-info-label">Parking</span>
+        <span class="visit-info-value">Free parking available<br>in adjacent garage</span>
+      </div>
+      <div class="visit-info-item">
+        <span class="visit-info-label">Dress Code</span>
+        <span class="visit-info-value">Come as you are —<br>casual to dressy</span>
+      </div>
+    </div>
+    <div class="visit-form reveal reveal-delay-3">
+      <h3>I'm Planning to Visit</h3>
+      <div class="form-row">
+        <div class="form-field">
+          <label>First Name</label>
+          <input id="visit-first" type="text" placeholder="John">
+        </div>
+        <div class="form-field">
+          <label>Last Name</label>
+          <input id="visit-last" type="text" placeholder="Doe">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input id="visit-email" type="email" placeholder="john@example.com">
+      </div>
+      <div class="form-field">
+        <label>Which service?</label>
+        <select id="visit-service">
+          <option>Sunday School — 10:00 AM</option>
+          <option>Hours of Transformation — 10:30 AM</option>
+          <option>Monday Prayerline — 8:00 PM</option>
+          <option>Wednesday Masterclass Bible Study — 7:00 PM</option>
+        </select>
+      </div>
+      <button class="btn-form-submit" onclick="handleVisitSubmit(this)">I'm Coming →</button>
+    </div>
+  </div>
+</section>
+
+<!-- GIVE -->
+<section id="give">
+  <div class="give-inner">
+    <p class="section-tag reveal">Support the Mission</p>
+    <h2 class="section-title reveal reveal-delay-1">Give Generously</h2>
+    <blockquote class="give-verse reveal reveal-delay-2">
+      "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
+      <cite>— 2 Corinthians 9:7</cite>
+    </blockquote>
+    <p class="section-body reveal reveal-delay-2" style="max-width:420px;text-align:center">Your generosity fuels ministry, changes lives, and reaches our community and the world with the love of Christ.</p>
+    <div class="give-options reveal reveal-delay-3">
+      <a href="give.html" class="btn-primary">Give Online</a>
+      <a href="give.html#text-to-give" class="btn-outline" style="color:var(--off-black);border-color:rgba(0,0,0,0.25)">Text to Give</a>
+      <a href="give.html#recurring" class="btn-outline" style="color:var(--off-black);border-color:rgba(0,0,0,0.25)">Set Up Recurring</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div>
+        <div class="footer-logo-top">Jesus House</div>
+        <div class="footer-logo-sub">Silicon Valley</div>
+      </div>
+      <p class="footer-tagline">A Spirit-filled community transforming San Jose and the Bay Area one life at a time.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/rccgjhsv/" target="_blank" rel="noopener" title="Facebook">
+          <svg viewBox="0 0 16 16"><path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/rccg_jhsv/" target="_blank" rel="noopener" title="Instagram">
+          <svg viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/></svg>
+        </a>
+        <a href="https://www.youtube.com/@jesushousesiliconvalleysan6808/featured" target="_blank" rel="noopener" title="YouTube">
+          <svg viewBox="0 0 16 16"><path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@rccg_jhsv" target="_blank" rel="noopener" title="TikTok">
+          <svg viewBox="0 0 16 16"><path d="M9 0h1.98c.144.715.54 1.617 1.235 2.512C12.895 3.389 13.797 4 15 4v2c-1.753 0-3.07-.814-4-1.829V11a5 5 0 1 1-5-5v2a3 3 0 1 0 3 3V0z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Explore</p>
+      <ul class="footer-links">
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Our Beliefs</a></li>
+        <li><a href="#">Leadership</a></li>
+        <li><a href="#">Sermons</a></li>
+        <li><a href="#">Blog</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Connect</p>
+      <ul class="footer-links">
+        <li><a href="#">Small Groups</a></li>
+        <li><a href="#">Volunteer</a></li>
+        <li><a href="#">Ministries</a></li>
+        <li><a href="#">Prayer Request</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <p class="footer-col-title">Resources</p>
+      <ul class="footer-links">
+        <li><a href="#">Give Online</a></li>
+        <li><a href="#">Events Calendar</a></li>
+        <li><a href="#">Live Stream</a></li>
+        <li><a href="#">Kids & Youth</a></li>
+        <li><a href="#">Prayer Wall</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">© 2025 Jesus House Silicon Valley. All rights reserved. San Jose, CA.</p>
+    <div class="footer-bottom-links">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Use</a>
+      <a href="#">Accessibility</a>
+    </div>
+  </div>
+</footer>
+
+<!-- SERMON MODAL -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-video">Video player · Sermon content here</div>
+    <div class="modal-body">
+      <h3 class="modal-title">Anchored in the Storm: Finding Peace When Life is Hard</h3>
+      <p class="modal-meta">Pastor Sunday Adelaja · Apr 13, 2025 · Series: Unshakeable</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap">
+        <button class="btn-sermon btn-sermon-primary">
+          <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path d="M11.596 8.697l-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/></svg>
+          Resume Playing
+        </button>
+        <button class="btn-sermon btn-sermon-ghost" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+  <button class="modal-close" onclick="closeModal()" style="position:fixed;top:20px;right:20px">✕</button>
+</div>
+
+<!-- EVENT MODALS -->
+<div class="event-modal-overlay" id="eventModal1" onclick="closeEventModal(event,'eventModal1')">
+  <div class="event-modal">
+    <button class="event-modal-close" onclick="document.getElementById('eventModal1').classList.remove('open')">✕</button>
+    <div class="event-modal-hero" style="background-image:url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?auto=format&w=800&q=80')">
+      <div class="event-modal-hero-overlay"></div>
+      <span class="event-modal-hero-tag">Conference</span>
+    </div>
+    <div class="event-modal-body">
+      <h2 class="event-modal-title">He-Motion / She-Motion — Triumphant Women Annual Conference</h2>
+      <p class="event-modal-desc">Our flagship annual conference bringing together the men and women of Jesus House Silicon Valley for a powerful multi-day encounter. He-Motion ignites the faith of our men while the Triumphant Women conference (She-Motion) equips and celebrates the women of the church. Expect powerful worship, prophetic ministry, life-changing teaching, and deep fellowship. This is one of the most anticipated events on our calendar — do not miss it.</p>
+      <div class="event-modal-details">
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Date</div>
+          <div class="event-modal-detail-value">Date to be announced</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Location</div>
+          <div class="event-modal-detail-value">474 Piercy Rd, San Jose, CA 95138</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Category</div>
+          <div class="event-modal-detail-value">Annual Conference</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Stay Updated</div>
+          <div class="event-modal-detail-value">Follow us on Instagram &amp; Facebook</div>
+        </div>
+      </div>
+      <a href="https://www.facebook.com/rccgjhsv/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex">Follow for Updates →</a>
+    </div>
+  </div>
+</div>
+
+<div class="event-modal-overlay" id="eventModal2" onclick="closeEventModal(event,'eventModal2')">
+  <div class="event-modal">
+    <button class="event-modal-close" onclick="document.getElementById('eventModal2').classList.remove('open')">✕</button>
+    <div class="event-modal-hero" style="background-image:url('Picnic.png')">
+      <div class="event-modal-hero-overlay"></div>
+      <span class="event-modal-hero-tag">Community</span>
+    </div>
+    <div class="event-modal-body">
+      <h2 class="event-modal-title">Annual Family Picnic & Community Outreach</h2>
+      <p class="event-modal-desc">One of our most beloved community events of the year. Families, friends, and neighbours come together for a day filled with food, games, music, and fellowship. It is also a powerful opportunity to reach out to our local community and share the love of Christ in a practical, tangible way. Come with your family — and bring a neighbour!</p>
+      <div class="event-modal-details">
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Date</div>
+          <div class="event-modal-detail-value">Date to be announced</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Location</div>
+          <div class="event-modal-detail-value">474 Piercy Rd, San Jose, CA 95138</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Category</div>
+          <div class="event-modal-detail-value">Community Outreach</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Who's It For</div>
+          <div class="event-modal-detail-value">The whole family — all ages welcome</div>
+        </div>
+      </div>
+      <a href="https://www.facebook.com/rccgjhsv/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex">Follow for Updates →</a>
+    </div>
+  </div>
+</div>
+
+<div class="event-modal-overlay" id="eventModal3" onclick="closeEventModal(event,'eventModal3')">
+  <div class="event-modal">
+    <button class="event-modal-close" onclick="document.getElementById('eventModal3').classList.remove('open')">✕</button>
+    <div class="event-modal-hero" style="background-image:url('Prophetic.png')">
+      <div class="event-modal-hero-overlay"></div>
+      <span class="event-modal-hero-tag">Prayer &amp; Prophecy</span>
+    </div>
+    <div class="event-modal-body">
+      <h2 class="event-modal-title">Annual Prophetic Solution — Patmos</h2>
+      <p class="event-modal-desc">"Maintain Your Steadfastness" — Patmos is our annual prophetic prayer gathering inspired by the Apostle John's experience on the Isle of Patmos. It is a dedicated season of focused prayer, prophetic declarations, and strategic intercession. Believers come together to seek God's word and direction for their lives, families, and the church for the season ahead. Come ready to encounter God and receive a fresh word.</p>
+      <div class="event-modal-details">
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Date</div>
+          <div class="event-modal-detail-value">Date to be announced</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Location</div>
+          <div class="event-modal-detail-value">474 Piercy Rd, San Jose, CA 95138</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Category</div>
+          <div class="event-modal-detail-value">Prayer &amp; Prophecy</div>
+        </div>
+        <div class="event-modal-detail-item">
+          <div class="event-modal-detail-label">Theme</div>
+          <div class="event-modal-detail-value">Maintain Your Steadfastness</div>
+        </div>
+      </div>
+      <a href="https://www.facebook.com/rccgjhsv/" target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex">Follow for Updates →</a>
+    </div>
+  </div>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <p class="tweaks-title">Tweaks</p>
+  <div class="tweak-row">
+    <span class="tweak-label">Accent Color</span>
+    <div class="tweak-colors" id="colorPicker">
+      <div class="tweak-color active" style="background:#7B3FA0" data-hue="280" title="Purple"></div>
+      <div class="tweak-color" style="background:oklch(0.72 0.10 200)" data-hue="200" title="Teal"></div>
+      <div class="tweak-color" style="background:oklch(0.72 0.10 280)" data-hue="280" title="Violet"></div>
+      <div class="tweak-color" style="background:oklch(0.72 0.10 350)" data-hue="350" title="Rose"></div>
+      <div class="tweak-color" style="background:oklch(0.72 0.10 140)" data-hue="140" title="Sage"></div>
+    </div>
+  </div>
+  <div class="tweak-row">
+    <span class="tweak-label">Font Style</span>
+    <select class="tweak-select" id="fontPicker">
+      <option value="'Playfair Display', Georgia, serif">Playfair Display (Elegant)</option>
+      <option value="'Cormorant Garamond', Georgia, serif">Cormorant Garamond (Classic)</option>
+      <option value="'DM Serif Display', Georgia, serif">DM Serif (Modern)</option>
+    </select>
+  </div>
+  <div class="tweak-row">
+    <span class="tweak-label">Hero Tagline</span>
+    <select class="tweak-select" id="taglinePicker">
+      <option value="A Place to Belong, Grow, &amp; Make a Difference">Belong, Grow, Make a Difference</option>
+      <option value="Where Faith Meets Purpose">Faith Meets Purpose</option>
+      <option value="All Are Welcome Here">All Are Welcome Here</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  // ── NAV SCROLL ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── MOBILE MENU ──
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  function closeMobile() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // ── SCROLL REVEAL ──
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // ── SERMON MODAL ──
+  function openModal() { document.getElementById('modal').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal() { document.getElementById('modal').classList.remove('open'); document.body.style.overflow=''; }
+  document.getElementById('modal').addEventListener('click', e => { if(e.target === document.getElementById('modal')) closeModal(); });
+
+  // ── EVENT MODALS ──
+  function closeEventModal(e, id) {
+    if (e.target === document.getElementById(id)) document.getElementById(id).classList.remove('open');
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') ['eventModal1','eventModal2','eventModal3'].forEach(id => document.getElementById(id).classList.remove('open'));
+  });
+
+  // ── VISIT FORM ──
+  async function handleVisitSubmit(btn) {
+    const first = document.getElementById('visit-first').value.trim();
+    const last = document.getElementById('visit-last').value.trim();
+    const email = document.getElementById('visit-email').value.trim();
+    const service = document.getElementById('visit-service').value;
+    if (!first || !email) {
+      alert('Please enter your name and email.');
+      return;
+    }
+    const orig = btn.textContent;
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    try {
+      await fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `New Visit: ${first} ${last} — ${service}`,
+          name: `${first} ${last}`,
+          email,
+          service
+        })
+      });
+    } catch(e) { /* fail silently — still show success */ }
+    btn.textContent = '✓ We\'ll see you Sunday!';
+    btn.style.background = '#4a7c59';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; }, 4000);
+  }
+
+  // ── TWEAKS ──
+  window.addEventListener('message', e => {
+    if (e.data && e.data.type === '__activate_edit_mode') {
+      document.getElementById('tweaks-panel').classList.add('open');
+    }
+    if (e.data && e.data.type === '__deactivate_edit_mode') {
+      document.getElementById('tweaks-panel').classList.remove('open');
+    }
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accentHue": 280,
+    "fontFamily": "'Playfair Display', Georgia, serif",
+    "tagline": "A Place to Belong, Grow, & Make a Difference"
+  }/*EDITMODE-END*/;
+
+  function applyAccent(hue) {
+    document.documentElement.style.setProperty('--gold', `oklch(0.45 0.18 ${hue})`);
+    document.documentElement.style.setProperty('--gold-light', `oklch(0.62 0.14 ${hue})`);
+    document.documentElement.style.setProperty('--gold-dark', `oklch(0.32 0.18 ${hue})`);
+  }
+
+  document.getElementById('colorPicker').addEventListener('click', e => {
+    const swatch = e.target.closest('.tweak-color');
+    if (!swatch) return;
+    document.querySelectorAll('.tweak-color').forEach(s => s.classList.remove('active'));
+    swatch.classList.add('active');
+    const hue = parseInt(swatch.dataset.hue);
+    applyAccent(hue);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { accentHue: hue } }, '*');
+  });
+
+  document.getElementById('fontPicker').addEventListener('change', e => {
+    document.documentElement.style.setProperty('--serif', e.target.value);
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { fontFamily: e.target.value } }, '*');
+  });
+
+  // Load saved Google font for Cormorant/DM Serif
+  if (TWEAK_DEFAULTS.fontFamily !== "'Playfair Display', Georgia, serif") {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Serif+Display&display=swap';
+    document.head.appendChild(link);
+    document.documentElement.style.setProperty('--serif', TWEAK_DEFAULTS.fontFamily);
+  }
+
+  document.getElementById('fontPicker').addEventListener('change', e => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Serif+Display&display=swap';
+    document.head.appendChild(link);
+  });
+
+  document.getElementById('taglinePicker').addEventListener('change', e => {
+    const heroTitle = document.querySelector('.hero-title');
+    const parts = e.target.value.split(', ');
+    if (parts.length >= 3) {
+      heroTitle.innerHTML = `A Place to<br><em>${parts[1]}, </em><br>${parts[2]}`;
+    } else {
+      heroTitle.innerHTML = `<em>${e.target.value}</em>`;
+    }
+  });
+</script>
+</body>
+</html>

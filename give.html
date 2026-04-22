@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Give — Jesus House Silicon Valley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0b09; --off-black: #1a1612; --dark: #211d19; --mid: #4a4340;
+    --cream: #f5f0e8; --off-white: #faf8f4;
+    --gold: #7B3FA0; --gold-light: #A97CC5; --gold-dark: #4F2275;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--off-white); color: var(--off-black); }
+
+  nav {
+    background: var(--black); padding: 0 48px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .nav-logo { text-decoration: none; }
+  .nav-logo-top { font-family: var(--serif); font-size: 17px; font-weight: 600; color: #fff; display: block; }
+  .nav-logo-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-top: 2px; }
+  .nav-back { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .nav-back:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .page-hero {
+    background: var(--dark); padding: 80px 80px 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .page-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .page-title { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); color: #fff; font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
+  .page-title em { font-style: italic; color: var(--gold-light); }
+  .page-subtitle { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.7; }
+  .hero-verse { margin-top: 28px; padding: 20px 24px; border-left: 3px solid var(--gold);
+    font-family: var(--serif); font-style: italic; font-size: 15px; color: rgba(255,255,255,0.55); line-height: 1.7; max-width: 560px; }
+  .hero-verse cite { display: block; font-family: var(--sans); font-style: normal; font-size: 11px;
+    font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
+
+  /* LAYOUT */
+  .give-layout { max-width: 1100px; margin: 0 auto; padding: 72px 80px; display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
+
+  /* FORM SIDE */
+  .give-form-wrap { }
+
+  .give-section-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--off-black); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); }
+
+  /* FREQUENCY TOGGLE */
+  .frequency-toggle { display: flex; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; margin-bottom: 32px; }
+  .freq-btn { flex: 1; padding: 14px; font-family: var(--sans); font-size: 14px; font-weight: 600;
+    background: none; border: none; cursor: pointer; color: var(--mid); transition: all 0.15s; text-align: center; }
+  .freq-btn.active { background: var(--off-black); color: #fff; }
+
+  /* AMOUNT GRID */
+  .amount-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 12px; display: block; }
+  .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .amount-btn { padding: 16px 8px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+    font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--off-black);
+    cursor: pointer; transition: all 0.15s; text-align: center; }
+  .amount-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .amount-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .custom-amount-wrap { position: relative; margin-bottom: 32px; }
+  .custom-amount-wrap span { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 18px; font-weight: 600; color: var(--mid); pointer-events: none; }
+  .custom-amount-input { width: 100%; padding: 16px 16px 16px 36px; font-family: var(--serif); font-size: 22px; font-weight: 600;
+    background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; color: var(--off-black); outline: none; transition: border-color 0.2s; }
+  .custom-amount-input:focus { border-color: var(--gold); }
+
+  /* FUND */
+  .fund-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 32px; }
+  .fund-btn { padding: 14px 16px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+    font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--off-black);
+    cursor: pointer; transition: all 0.15s; text-align: left; display: flex; flex-direction: column; gap: 3px; }
+  .fund-btn span { font-size: 11px; font-weight: 400; color: #888; }
+  .fund-btn:hover { border-color: var(--gold); }
+  .fund-btn.active { border-color: var(--gold); background: #F0E5FA; }
+  .fund-btn.active .fund-check { display: block; }
+  .fund-check { display: none; float: right; color: var(--gold); font-size: 14px; }
+
+  /* PAYMENT METHOD */
+  .method-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 32px; }
+  .method-btn { padding: 16px 8px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+    cursor: pointer; transition: all 0.15s; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .method-btn:hover { border-color: var(--gold); }
+  .method-btn.active { border-color: var(--gold); background: #F0E5FA; }
+  .method-btn svg { width: 28px; height: 28px; fill: var(--mid); }
+  .method-btn.active svg { fill: var(--gold); }
+  .method-btn span { font-size: 12px; font-weight: 600; color: var(--mid); }
+  .method-btn.active span { color: var(--gold-dark); }
+
+  /* DONOR INFO */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .field-group { margin-bottom: 16px; }
+  label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 6px; }
+  input, select {
+    width: 100%; padding: 13px 16px; font-family: var(--sans); font-size: 15px;
+    background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+    color: var(--off-black); outline: none; transition: border-color 0.2s;
+  }
+  input:focus, select:focus { border-color: var(--gold); }
+  select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 16 16'%3E%3Cpath fill='%23666' d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; cursor: pointer; }
+
+  .give-note { font-size: 12px; color: #888; line-height: 1.6; margin-bottom: 24px; }
+
+  .give-submit-btn {
+    width: 100%; padding: 18px; background: var(--gold); color: #fff;
+    font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; border: none; border-radius: 4px; cursor: pointer;
+    transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .give-submit-btn:hover { background: var(--gold-dark); }
+  .give-submit-btn .summary { font-size: 12px; opacity: 0.75; font-weight: 400; text-transform: none; letter-spacing: 0; }
+
+  .secure-note { display: flex; align-items: center; gap: 8px; justify-content: center;
+    margin-top: 14px; font-size: 12px; color: #aaa; }
+  .secure-note svg { width: 14px; height: 14px; fill: #aaa; }
+
+  /* SUCCESS */
+  .success-panel { display: none; text-align: center; padding: 64px 32px; }
+  .success-panel svg { width: 56px; height: 56px; fill: var(--gold); margin-bottom: 20px; }
+  .success-panel h2 { font-family: var(--serif); font-size: 32px; margin-bottom: 12px; }
+  .success-panel p { font-size: 15px; color: #666; line-height: 1.7; max-width: 400px; margin: 0 auto 28px; }
+
+  /* SIDEBAR */
+  .give-sidebar { display: flex; flex-direction: column; gap: 24px; }
+
+  .sidebar-card { background: #fff; border: 1px solid rgba(0,0,0,0.08); border-radius: 6px; padding: 28px; }
+  .sidebar-card-title { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--off-black); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(0,0,0,0.07); }
+  .sidebar-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .sidebar-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .sidebar-icon { width: 40px; height: 40px; border-radius: 50%; background: #F0E5FA; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .sidebar-icon svg { width: 18px; height: 18px; fill: var(--gold); }
+  .sidebar-item-title { font-size: 14px; font-weight: 600; color: var(--off-black); margin-bottom: 3px; }
+  .sidebar-item-desc { font-size: 12px; color: #888; line-height: 1.5; }
+
+  /* TEXT TO GIVE */
+  .text-give-card { background: var(--dark); border-radius: 6px; padding: 28px; }
+  .text-give-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+  .text-give-number { font-family: var(--serif); font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+  .text-give-instruction { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .text-give-steps { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+  .text-give-step { display: flex; gap: 12px; align-items: flex-start; }
+  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-text { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+
+  /* RECURRING anchor target */
+  #recurring { scroll-margin-top: 90px; }
+  #text-to-give { scroll-margin-top: 90px; }
+
+  @media (max-width: 960px) {
+    nav { padding: 0 24px; }
+    .page-hero { padding: 56px 24px 48px; }
+    .give-layout { grid-template-columns: 1fr; padding: 48px 24px; gap: 40px; }
+    .amount-grid { grid-template-columns: repeat(3, 1fr); }
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Jesus House</span>
+    <span class="nav-logo-sub">Silicon Valley · San Jose, CA</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-tag">Support the Mission</p>
+  <h1 class="page-title">Give <em>Generously</em></h1>
+  <p class="page-subtitle">Your generosity fuels ministry, changes lives, and reaches our community and the world with the love of Christ.</p>
+  <blockquote class="hero-verse">
+    "Each of you should give what you have decided in your heart to give, not reluctantly or under compulsion, for God loves a cheerful giver."
+    <cite>— 2 Corinthians 9:7</cite>
+  </blockquote>
+</div>
+
+<div class="give-layout">
+
+  <!-- FORM -->
+  <div class="give-form-wrap">
+    <form id="giveForm" onsubmit="handleGive(event)">
+
+      <!-- FREQUENCY -->
+      <div id="recurring">
+        <h2 class="give-section-title">Giving Frequency</h2>
+        <div class="frequency-toggle" style="margin-bottom:32px">
+          <button type="button" class="freq-btn active" onclick="setFreq('one-time', this)">One-Time Gift</button>
+          <button type="button" class="freq-btn" onclick="setFreq('weekly', this)">Weekly</button>
+          <button type="button" class="freq-btn" onclick="setFreq('monthly', this)">Monthly</button>
+        </div>
+      </div>
+
+      <!-- AMOUNT -->
+      <h2 class="give-section-title">Select Amount</h2>
+      <span class="amount-label">Choose a preset amount or enter your own</span>
+      <div class="amount-grid">
+        <button type="button" class="amount-btn" onclick="setAmount(25, this)">$25</button>
+        <button type="button" class="amount-btn" onclick="setAmount(50, this)">$50</button>
+        <button type="button" class="amount-btn active" onclick="setAmount(100, this)">$100</button>
+        <button type="button" class="amount-btn" onclick="setAmount(200, this)">$200</button>
+        <button type="button" class="amount-btn" onclick="setAmount(500, this)">$500</button>
+        <button type="button" class="amount-btn" onclick="setAmount(1000, this)">$1,000</button>
+      </div>
+      <div class="custom-amount-wrap">
+        <span>$</span>
+        <input type="number" class="custom-amount-input" id="customAmount" placeholder="Other amount" min="1" oninput="clearPreset()">
+      </div>
+
+      <!-- FUND -->
+      <h2 class="give-section-title">Designate Your Gift</h2>
+      <div class="fund-grid" style="margin-bottom:32px">
+        <button type="button" class="fund-btn active" onclick="setFund('Tithes & Offerings', this)">
+          <strong>Tithes &amp; Offerings <span class="fund-check">✓</span></strong>
+          <span>General ministry fund</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="setFund('Building Fund', this)">
+          <strong>Building Fund <span class="fund-check">✓</span></strong>
+          <span>Church facility &amp; development</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="setFund('Missions', this)">
+          <strong>Missions <span class="fund-check">✓</span></strong>
+          <span>Local &amp; global outreach</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="setFund('Shepherds Care Foundation', this)">
+          <strong>Shepherds Care Foundation <span class="fund-check">✓</span></strong>
+          <span>Community welfare</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="setFund('Where Most Needed', this)">
+          <strong>Where Most Needed <span class="fund-check">✓</span></strong>
+          <span>Unrestricted gift</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="setFund('Youth & Children', this)">
+          <strong>Youth &amp; Children <span class="fund-check">✓</span></strong>
+          <span>Next generation ministry</span>
+        </button>
+      </div>
+
+      <!-- PAYMENT METHOD -->
+      <h2 class="give-section-title">Payment Method</h2>
+      <div class="method-grid">
+        <button type="button" class="method-btn active" onclick="setMethod('bank', this)">
+          <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+          <span>Bank Transfer</span>
+        </button>
+        <button type="button" class="method-btn" onclick="setMethod('paypal', this)">
+          <svg viewBox="0 0 16 16"><path d="M3.16 13.5a.5.5 0 0 1-.486-.373l-1.66-6.625a.5.5 0 0 1 .486-.627H13a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5H2.5l1.25 5h8.5a.5.5 0 0 1 0 1h-9.09z"/><path fill-rule="evenodd" d="M.5 1h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1z"/></svg>
+          <span>PayPal</span>
+        </button>
+      </div>
+
+      <!-- DONOR INFO -->
+      <h2 class="give-section-title">Your Information</h2>
+      <div class="field-row">
+        <div>
+          <label>First Name</label>
+          <input type="text" placeholder="John" required>
+        </div>
+        <div>
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe" required>
+        </div>
+      </div>
+      <div class="field-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="john@example.com" required>
+      </div>
+      <div class="field-group">
+        <label>Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
+        <input type="tel" placeholder="+1 (408) 000-0000">
+      </div>
+
+      <p class="give-note">Your contribution is tax-deductible. A receipt will be sent to your email address. All payments are processed securely.</p>
+
+      <button type="submit" class="give-submit-btn" id="submitBtn">
+        <span>Give <span id="giveAmountLabel">$100</span> Now</span>
+        <svg viewBox="0 0 16 16" fill="currentColor" style="width:16px;height:16px"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+      </button>
+      <div class="secure-note">
+        <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        Secure &amp; encrypted · SSL protected
+      </div>
+    </form>
+
+    <div class="success-panel" id="successPanel">
+      <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+      <h2>Thank You for Your Generosity!</h2>
+      <p>Your gift has been received. A confirmation and tax receipt will be sent to your email. May God bless you abundantly for your faithfulness.</p>
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Back to Home</a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="give-sidebar">
+
+    <!-- WAYS TO GIVE -->
+    <div class="sidebar-card">
+      <h3 class="sidebar-card-title">Other Ways to Give</h3>
+      <div class="sidebar-item">
+        <div class="sidebar-icon">
+          <svg viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2zm3.708 6.208L1 11.105V5.383l4.708 2.825zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2z"/></svg>
+        </div>
+        <div>
+          <div class="sidebar-item-title">Mail a Cheque</div>
+          <div class="sidebar-item-desc">Make payable to <strong>RCCG Jesus House Silicon Valley</strong> and mail to 474 Piercy Rd, San Jose, CA 95138.</div>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-icon">
+          <svg viewBox="0 0 16 16"><path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path fill-rule="evenodd" d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 4a3 3 0 1 0 6 0 3 3 0 0 0-6 0zm7.5-2a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 2a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/></svg>
+        </div>
+        <div>
+          <div class="sidebar-item-title">Give In Person</div>
+          <div class="sidebar-item-desc">Offerings are received during every Sunday service at 474 Piercy Rd, San Jose.</div>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-icon">
+          <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        </div>
+        <div>
+          <div class="sidebar-item-title">Bank Transfer (Zelle)</div>
+          <div class="sidebar-item-desc">Send directly via Zelle to <strong>rccgjhsv2013@gmail.com</strong>. Please include your name and fund designation in the note.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="sidebar-card">
+      <h3 class="sidebar-card-title">Common Questions</h3>
+      <div class="sidebar-item">
+        <div>
+          <div class="sidebar-item-title">Is my gift tax-deductible?</div>
+          <div class="sidebar-item-desc">Yes. RCCG Jesus House Silicon Valley is a registered 501(c)(3) nonprofit. You will receive a tax receipt by email.</div>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div>
+          <div class="sidebar-item-title">Is it secure?</div>
+          <div class="sidebar-item-desc">All online transactions are encrypted with SSL and processed through a PCI-compliant payment gateway.</div>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div>
+          <div class="sidebar-item-title">Can I manage recurring gifts?</div>
+          <div class="sidebar-item-desc">Yes. After your first gift you'll receive login details to manage, pause, or cancel your recurring giving at any time.</div>
+        </div>
+      </div>
+      <div class="sidebar-item">
+        <div>
+          <div class="sidebar-item-title">Questions?</div>
+          <div class="sidebar-item-desc">Contact us at <strong>give@rccgjhsv.org</strong> or speak to an usher on Sunday.</div>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<script>
+  let selectedAmount = 100;
+  let selectedFreq = 'one-time';
+  let selectedFund = 'Tithes & Offerings';
+  let selectedMethod = 'card';
+
+  function setFreq(freq, btn) {
+    selectedFreq = freq;
+    document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function setAmount(amount, btn) {
+    selectedAmount = amount;
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('customAmount').value = '';
+    updateLabel();
+  }
+
+  function clearPreset() {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+    selectedAmount = parseFloat(document.getElementById('customAmount').value) || 0;
+    updateLabel();
+  }
+
+  function setFund(fund, btn) {
+    selectedFund = fund;
+    document.querySelectorAll('.fund-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function setMethod(method, btn) {
+    selectedMethod = method;
+    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function updateLabel() {
+    const label = selectedAmount > 0 ? '$' + selectedAmount.toLocaleString() : 'Now';
+    document.getElementById('giveAmountLabel').textContent = label;
+  }
+
+  function handleGive(e) {
+    e.preventDefault();
+    document.getElementById('giveForm').style.display = 'none';
+    document.getElementById('successPanel').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Scroll to section from URL hash
+  window.addEventListener('DOMContentLoaded', () => {
+    if (window.location.hash === '#recurring') {
+      document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.freq-btn')[2].classList.add('active');
+      selectedFreq = 'monthly';
+    }
+  });
+</script>
+
+</body>
+</html>

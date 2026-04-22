@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Program Calendar — Jesus House Silicon Valley</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0b09; --off-black: #1a1612; --dark: #211d19;
+    --cream: #f5f0e8; --off-white: #faf8f4; --mid: #4a4340;
+    --gold: #7B3FA0; --gold-light: #A97CC5; --gold-dark: #4F2275;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); background: var(--off-white); color: var(--off-black); }
+
+  /* NAV */
+  nav {
+    background: var(--black); padding: 0 48px; height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 50;
+  }
+  .nav-logo { text-decoration: none; }
+  .nav-logo-top { font-family: var(--serif); font-size: 17px; font-weight: 600; color: #fff; display: block; }
+  .nav-logo-sub { font-size: 10px; color: var(--gold-light); letter-spacing: 0.18em; text-transform: uppercase; display: block; margin-top: 2px; }
+  .nav-back { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 8px;
+    transition: color 0.2s; }
+  .nav-back:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .page-hero {
+    background: var(--dark); padding: 80px 80px 64px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .page-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px; }
+  .page-title { font-family: var(--serif); font-size: clamp(40px, 5vw, 64px); color: #fff;
+    font-weight: 700; line-height: 1.1; margin-bottom: 16px; }
+  .page-title em { font-style: italic; color: var(--gold-light); }
+  .page-subtitle { font-size: 17px; color: rgba(255,255,255,0.6); max-width: 560px; line-height: 1.7; }
+
+  /* LAYOUT */
+  .calendar-layout { display: grid; grid-template-columns: 260px 1fr; gap: 0; max-width: 1200px; margin: 0 auto; padding: 64px 48px; }
+
+  /* SIDEBAR */
+  .cal-sidebar { padding-right: 48px; border-right: 1px solid rgba(0,0,0,0.08); }
+  .sidebar-section { margin-bottom: 40px; }
+  .sidebar-title { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold-dark); margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,0.08); }
+  .sidebar-filter { display: flex; flex-direction: column; gap: 6px; }
+  .filter-btn {
+    background: none; border: none; text-align: left; cursor: pointer;
+    font-family: var(--sans); font-size: 14px; color: var(--mid);
+    padding: 8px 12px; border-radius: 4px; transition: all 0.15s;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .filter-btn:hover { background: var(--cream); color: var(--off-black); }
+  .filter-btn.active { background: var(--off-black); color: #fff; font-weight: 500; }
+  .filter-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  .subscribe-box { background: var(--dark); padding: 20px; border-radius: 4px; }
+  .subscribe-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+  .subscribe-links { display: flex; flex-direction: column; gap: 8px; }
+  .subscribe-link { color: var(--gold-light); font-size: 13px; text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.15s; }
+  .subscribe-link:hover { color: #fff; }
+
+  /* MAIN CONTENT */
+  .cal-main { padding-left: 48px; }
+
+  /* MONTH DIVIDER */
+  .month-heading {
+    font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--off-black);
+    margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--gold);
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .month-heading span { font-family: var(--sans); font-size: 12px; font-weight: 500; color: #999; letter-spacing: 0.08em; }
+
+  /* EVENT LIST */
+  .events-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 56px; }
+
+  .event-row {
+    display: grid; grid-template-columns: 80px 160px 1fr;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    transition: background 0.15s;
+  }
+  .event-row:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+  .event-row:hover { background: #fff; }
+
+  /* DATE BLOCK */
+  .event-date-col {
+    padding: 24px 16px 24px 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding-top: 26px;
+  }
+  .event-date-day { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-dark); }
+  .event-date-num { font-family: var(--serif); font-size: 32px; font-weight: 700; color: var(--off-black); line-height: 1; margin: 4px 0; }
+  .event-date-month { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #888; }
+  .event-date-recurring {
+    margin-top: 8px; font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--gold); background: #F0E5FA;
+    padding: 3px 7px; border-radius: 2px; text-align: center;
+  }
+
+  /* THUMB */
+  .event-thumb-col { padding: 20px 20px 20px 0; }
+  .event-thumb {
+    width: 140px; height: 90px; object-fit: cover; border-radius: 3px;
+    display: block; background: var(--cream);
+  }
+  .event-thumb-placeholder {
+    width: 140px; height: 90px; border-radius: 3px;
+    background: var(--dark); display: flex; align-items: center; justify-content: center;
+  }
+  .event-thumb-placeholder svg { width: 28px; height: 28px; fill: rgba(255,255,255,0.2); }
+
+  /* INFO */
+  .event-info-col { padding: 24px 0; }
+  .event-category { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .event-title { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--off-black); margin-bottom: 8px; line-height: 1.3; }
+  .event-meta { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 10px; }
+  .event-meta-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #666; }
+  .event-meta-item svg { width: 14px; height: 14px; fill: var(--gold-dark); flex-shrink: 0; }
+  .event-desc { font-size: 13px; color: #666; line-height: 1.6; max-width: 560px; }
+  .event-tba { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; color: #888; background: rgba(0,0,0,0.05);
+    padding: 4px 10px; border-radius: 2px; margin-top: 8px; }
+
+  /* WEEKLY SECTION */
+  .weekly-label {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #fff; background: var(--off-black); padding: 4px 10px; border-radius: 2px;
+    margin-left: 8px; vertical-align: middle;
+  }
+
+  /* BACK */
+  .back-cta { text-align: center; padding: 48px 0; border-top: 1px solid rgba(0,0,0,0.08); }
+  .btn { display: inline-flex; align-items: center; gap: 10px; background: var(--gold);
+    color: var(--black); font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+    text-transform: uppercase; text-decoration: none; padding: 16px 32px;
+    border-radius: 2px; transition: background 0.2s; }
+  .btn:hover { background: var(--gold-light); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .page-hero { padding: 56px 24px 48px; }
+    .calendar-layout { grid-template-columns: 1fr; padding: 40px 24px; }
+    .cal-sidebar { padding-right: 0; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.08); padding-bottom: 32px; margin-bottom: 40px; }
+    .cal-main { padding-left: 0; }
+    .event-row { grid-template-columns: 64px 1fr; }
+    .event-thumb-col { display: none; }
+  }
+  @media (max-width: 600px) {
+    .event-row { grid-template-columns: 56px 1fr; }
+    .event-date-num { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-top">Jesus House</span>
+    <span class="nav-logo-sub">Silicon Valley · San Jose, CA</span>
+  </a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+    Back to Home
+  </a>
+</nav>
+
+<div class="page-hero">
+  <p class="page-tag">Stay Connected</p>
+  <h1 class="page-title">Program <em>Calendar</em></h1>
+  <p class="page-subtitle">Every gathering is an opportunity to encounter God. Find a service, conference, or programme that fits your season.</p>
+</div>
+
+<div class="calendar-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="cal-sidebar">
+
+    <div class="sidebar-section">
+      <p class="sidebar-title">Filter by Type</p>
+      <div class="sidebar-filter">
+        <button class="filter-btn active" onclick="filterEvents('all', this)">
+          <span class="filter-dot" style="background:var(--gold)"></span> All Events
+        </button>
+        <button class="filter-btn" onclick="filterEvents('weekly', this)">
+          <span class="filter-dot" style="background:#4a90d9"></span> Weekly
+        </button>
+        <button class="filter-btn" onclick="filterEvents('conference', this)">
+          <span class="filter-dot" style="background:#9b59b6"></span> Conferences
+        </button>
+        <button class="filter-btn" onclick="filterEvents('prayer', this)">
+          <span class="filter-dot" style="background:#e67e22"></span> Prayer
+        </button>
+        <button class="filter-btn" onclick="filterEvents('community', this)">
+          <span class="filter-dot" style="background:#27ae60"></span> Community
+        </button>
+        <button class="filter-btn" onclick="filterEvents('children', this)">
+          <span class="filter-dot" style="background:#e74c3c"></span> Children
+        </button>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <p class="sidebar-title">Location</p>
+      <p style="font-size:13px;color:#666;line-height:1.6">
+        474 Piercy Rd<br>San Jose, CA 95138<br><br>
+        Some programmes also available online.
+      </p>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="subscribe-box">
+        <p class="subscribe-label">Subscribe</p>
+        <div class="subscribe-links">
+          <a href="#" class="subscribe-link">
+            <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/></svg>
+            Google Calendar
+          </a>
+          <a href="#" class="subscribe-link">
+            <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/><path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/></svg>
+            Outlook / iCal
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="cal-main">
+
+    <!-- WEEKLY PROGRAMS -->
+    <div class="month-heading">
+      Weekly Programmes <span class="weekly-label">Recurring</span>
+    </div>
+    <div class="events-list">
+
+      <div class="event-row" data-type="weekly">
+        <div class="event-date-col">
+          <div class="event-date-day">Sun</div>
+          <div class="event-date-num">10</div>
+          <div class="event-date-month">AM</div>
+          <div class="event-date-recurring">Weekly</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3A1.5 1.5 0 0 1 15 10.5v3A1.5 1.5 0 0 1 13.5 15h-3A1.5 1.5 0 0 1 9 13.5v-3z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Weekly · Sunday</p>
+          <h3 class="event-title">Sunday School</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              10:00 AM – 10:30 AM
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd · In-Person &amp; Online
+            </div>
+          </div>
+          <p class="event-desc">In-depth Bible study and discipleship for all ages. Build your foundation in the Word before the main service.</p>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="weekly">
+        <div class="event-date-col">
+          <div class="event-date-day">Sun</div>
+          <div class="event-date-num">10:30</div>
+          <div class="event-date-month">AM</div>
+          <div class="event-date-recurring">Weekly</div>
+        </div>
+        <div class="event-thumb-col">
+          <img class="event-thumb" src="uploads/A7407011-Edit.jpg" alt="Hours of Transformation Sunday Service">
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Weekly · Sunday</p>
+          <h3 class="event-title">Hours of Transformation</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              10:30 AM – 12:30 PM
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd · In-Person &amp; Online
+            </div>
+          </div>
+          <p class="event-desc">Our main Sunday worship service — Spirit-filled praise, the preached Word, and corporate prayer. All are welcome.</p>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="weekly prayer">
+        <div class="event-date-col">
+          <div class="event-date-day">Mon</div>
+          <div class="event-date-num">8</div>
+          <div class="event-date-month">PM</div>
+          <div class="event-date-recurring">Weekly</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Weekly · Prayer</p>
+          <h3 class="event-title">Prayerline</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              8:00 PM – 9:00 PM
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/></svg>
+              Online (Call-In)
+            </div>
+          </div>
+          <p class="event-desc">Corporate prayer and intercession for members, families, and the nations. Join us on the prayer line every Monday evening.</p>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="weekly">
+        <div class="event-date-col">
+          <div class="event-date-day">Wed</div>
+          <div class="event-date-num">7</div>
+          <div class="event-date-month">PM</div>
+          <div class="event-date-recurring">Weekly</div>
+        </div>
+        <div class="event-thumb-col">
+          <img class="event-thumb" src="uploads/A7407021-Edit.jpg" alt="Masterclass Bible Study">
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Weekly · Wednesday</p>
+          <h3 class="event-title">Masterclass Bible Study</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              7:00 PM – 9:00 PM
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd · In-Person &amp; Virtual
+            </div>
+          </div>
+          <p class="event-desc">Deep, practical teaching from God's Word to equip and empower you for everyday life. Open to all.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- QUARTERLY -->
+    <div class="month-heading">
+      Quarterly Programmes <span style="font-family:var(--sans);font-size:12px;font-weight:500;color:#999;letter-spacing:0.08em">4× per year</span>
+    </div>
+    <div class="events-list">
+
+      <div class="event-row" data-type="conference">
+        <div class="event-date-col">
+          <div class="event-date-day">Qtr</div>
+          <div class="event-date-num" style="font-size:22px">LRPM</div>
+          <div class="event-date-month">Class</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Quarterly · Leadership</p>
+          <h3 class="event-title">LRPM Class</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Held Quarterly
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">Leadership and Relationship Programme for Ministers — equipping leaders within the church for effective service and ministry.</p>
+          <span class="event-tba">Next Date TBA</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ANNUAL EVENTS -->
+    <div class="month-heading">
+      Annual Programmes <span style="font-family:var(--sans);font-size:12px;font-weight:500;color:#999;letter-spacing:0.08em">2026</span>
+    </div>
+    <div class="events-list">
+
+      <div class="event-row" data-type="conference">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Conf</div>
+        </div>
+        <div class="event-thumb-col">
+          <img class="event-thumb" src="uploads/A7407599-Edit.jpg" alt="He-Motion She-Motion Conference">
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual Conference</p>
+          <h3 class="event-title">He-Motion / She-Motion — Triumphant Women Annual Conference</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Multi-day event
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">Our flagship annual conference for men and women. A powerful multi-day gathering to ignite faith, strengthen identity in Christ, and walk in triumph.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="prayer">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Prayer</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/><path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual · Prayer &amp; Prophecy</p>
+          <h3 class="event-title">Annual Prophetic Solution — Patmos</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Date TBA
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">"Maintain Your Steadfastness" — a focused season of prophetic prayer, strategic intercession, and receiving God's word for the year.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="prayer">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Brkfst</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual · Prayer Breakfast</p>
+          <h3 class="event-title">PMSEC Breakfast</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Date TBA
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">A special breakfast gathering for prayer, fellowship, and encouragement among the congregation.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="conference">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Conf</div>
+        </div>
+        <div class="event-thumb-col">
+          <img class="event-thumb" src="uploads/A7407625-Edit.jpg" alt="Women's Conference">
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual · Women's Conference</p>
+          <h3 class="event-title">Women's Conference</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Date TBA
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">A dedicated conference celebrating and equipping the women of Jesus House Silicon Valley to walk boldly in their God-given calling.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="children">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Summer</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual · Children</p>
+          <h3 class="event-title">Summer Bible Camp for Children</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Summer 2026
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">A fun, faith-filled summer programme for children to learn the Word, build friendships, and grow in their relationship with God.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="community">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Picnic</div>
+        </div>
+        <div class="event-thumb-col">
+          <div class="event-thumb-placeholder">
+            <svg viewBox="0 0 16 16"><path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>
+          </div>
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual · Community</p>
+          <h3 class="event-title">Annual Family Picnic &amp; Community Outreach</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Date TBA
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              San Jose, CA
+            </div>
+          </div>
+          <p class="event-desc">A day of food, fun, and fellowship for the whole family — and an opportunity to share God's love with our neighbours and community.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+      <div class="event-row" data-type="community">
+        <div class="event-date-col">
+          <div class="event-date-day">TBA</div>
+          <div class="event-date-num" style="font-size:22px">2026</div>
+          <div class="event-date-month">Anniv</div>
+        </div>
+        <div class="event-thumb-col">
+          <img class="event-thumb" src="uploads/A7407558-Edit.jpg" alt="Church Anniversary">
+        </div>
+        <div class="event-info-col">
+          <p class="event-category">Annual · Celebration</p>
+          <h3 class="event-title">Church Anniversary</h3>
+          <div class="event-meta">
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/><path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/></svg>
+              Date TBA
+            </div>
+            <div class="event-meta-item">
+              <svg viewBox="0 0 16 16"><path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/><path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+              474 Piercy Rd, San Jose
+            </div>
+          </div>
+          <p class="event-desc">Celebrating another year of God's faithfulness over Jesus House Silicon Valley — a special service of thanksgiving, testimonies, and praise.</p>
+          <span class="event-tba">Date to be announced</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="back-cta">
+      <a href="index.html" class="btn">
+        <svg viewBox="0 0 16 16" fill="currentColor" style="width:14px;height:14px"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/></svg>
+        Back to Home
+      </a>
+    </div>
+
+  </main>
+</div>
+
+<script>
+function filterEvents(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.event-row').forEach(row => {
+    if (type === 'all') {
+      row.style.display = '';
+    } else {
+      const types = row.dataset.type || '';
+      row.style.display = types.includes(type) ? '' : 'none';
+    }
+  });
+}
+</script>
+
+</body>
+</html>
