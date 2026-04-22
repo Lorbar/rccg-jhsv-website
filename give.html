@@ -52,11 +52,12 @@
 
   .give-section-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--off-black); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); }
 
-  /* FREQUENCY TOGGLE */
-  .frequency-toggle { display: flex; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; margin-bottom: 32px; }
-  .freq-btn { flex: 1; padding: 14px; font-family: var(--sans); font-size: 14px; font-weight: 600;
-    background: none; border: none; cursor: pointer; color: var(--mid); transition: all 0.15s; text-align: center; }
-  .freq-btn.active { background: var(--off-black); color: #fff; }
+  /* PARTNER INTRO */
+  .partner-intro { margin-bottom: 36px; padding: 28px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); border-radius: 8px; color: #fff; }
+  .partner-intro-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
+  .partner-intro h2 { font-family: var(--serif); font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.2; }
+  .partner-intro h2 em { font-style: italic; color: rgba(255,255,255,0.85); }
+  .partner-intro p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.7; }
 
   /* AMOUNT GRID */
   .amount-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 12px; display: block; }
@@ -139,19 +140,15 @@
   .sidebar-item-title { font-size: 14px; font-weight: 600; color: var(--off-black); margin-bottom: 3px; }
   .sidebar-item-desc { font-size: 12px; color: #888; line-height: 1.5; }
 
-  /* TEXT TO GIVE */
-  .text-give-card { background: var(--dark); border-radius: 6px; padding: 28px; }
-  .text-give-tag { font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-  .text-give-number { font-family: var(--serif); font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .text-give-instruction { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.6; }
-  .text-give-steps { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
-  .text-give-step { display: flex; gap: 12px; align-items: flex-start; }
-  .step-num { width: 22px; height: 22px; border-radius: 50%; background: var(--gold); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-  .step-text { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+  /* ZELLE FEATURED CARD */
+  .zelle-card { background: var(--off-black); border-radius: 8px; padding: 28px; border: 1px solid rgba(123,63,160,0.4); }
+  .zelle-card-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px; }
+  .zelle-card-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .zelle-card-email { font-size: 18px; font-weight: 700; color: var(--gold-light); letter-spacing: 0.02em; margin: 14px 0; padding: 12px 16px; background: rgba(123,63,160,0.25); border-radius: 4px; word-break: break-all; }
+  .zelle-card-note { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
-  /* RECURRING anchor target */
-  #recurring { scroll-margin-top: 90px; }
-  #text-to-give { scroll-margin-top: 90px; }
+  /* PARTNER anchor */
+  #partner { scroll-margin-top: 90px; }
 
   @media (max-width: 960px) {
     nav { padding: 0 24px; }
@@ -187,115 +184,70 @@
 
 <div class="give-layout">
 
-  <!-- FORM -->
-  <div class="give-form-wrap">
-    <form id="giveForm" onsubmit="handleGive(event)">
+  <!-- PARTNER FORM -->
+  <div class="give-form-wrap" id="partner">
 
-      <!-- FREQUENCY -->
-      <div id="recurring">
-        <h2 class="give-section-title">Giving Frequency</h2>
-        <div class="frequency-toggle" style="margin-bottom:32px">
-          <button type="button" class="freq-btn active" onclick="setFreq('one-time', this)">One-Time Gift</button>
-          <button type="button" class="freq-btn" onclick="setFreq('weekly', this)">Weekly</button>
-          <button type="button" class="freq-btn" onclick="setFreq('monthly', this)">Monthly</button>
-        </div>
-      </div>
+    <div class="partner-intro">
+      <p class="partner-intro-tag">Monthly Partnership</p>
+      <h2>Become a <em>Church Partner</em></h2>
+      <p>Partners are the heartbeat of our ministry. By making a monthly commitment, you join a community of faithful givers whose consistent generosity keeps the work of God moving forward — funding worship, outreach, care, and the next generation. Every month, your pledge makes a real difference.</p>
+    </div>
+
+    <form id="partnerForm">
 
       <!-- AMOUNT -->
-      <h2 class="give-section-title">Select Amount</h2>
-      <span class="amount-label">Choose a preset amount or enter your own</span>
+      <h2 class="give-section-title">Monthly Pledge Amount</h2>
+      <span class="amount-label">Select your monthly commitment</span>
       <div class="amount-grid">
-        <button type="button" class="amount-btn" onclick="setAmount(25, this)">$25</button>
-        <button type="button" class="amount-btn" onclick="setAmount(50, this)">$50</button>
-        <button type="button" class="amount-btn active" onclick="setAmount(100, this)">$100</button>
         <button type="button" class="amount-btn" onclick="setAmount(200, this)">$200</button>
+        <button type="button" class="amount-btn active" onclick="setAmount(250, this)">$250</button>
+        <button type="button" class="amount-btn" onclick="setAmount(300, this)">$300</button>
         <button type="button" class="amount-btn" onclick="setAmount(500, this)">$500</button>
         <button type="button" class="amount-btn" onclick="setAmount(1000, this)">$1,000</button>
+        <button type="button" class="amount-btn" onclick="setAmount(0, this)" id="aboveBtn">Above</button>
       </div>
-      <div class="custom-amount-wrap">
+      <div class="custom-amount-wrap" id="customWrap" style="display:none">
         <span>$</span>
-        <input type="number" class="custom-amount-input" id="customAmount" placeholder="Other amount" min="1" oninput="clearPreset()">
+        <input type="number" class="custom-amount-input" id="customAmount" placeholder="Enter monthly amount" min="1" oninput="updateCustom()">
       </div>
 
-      <!-- FUND -->
-      <h2 class="give-section-title">Designate Your Gift</h2>
-      <div class="fund-grid" style="margin-bottom:32px">
-        <button type="button" class="fund-btn active" onclick="setFund('Tithes & Offerings', this)">
-          <strong>Tithes &amp; Offerings <span class="fund-check">✓</span></strong>
-          <span>General ministry fund</span>
-        </button>
-        <button type="button" class="fund-btn" onclick="setFund('Building Fund', this)">
-          <strong>Building Fund <span class="fund-check">✓</span></strong>
-          <span>Church facility &amp; development</span>
-        </button>
-        <button type="button" class="fund-btn" onclick="setFund('Missions', this)">
-          <strong>Missions <span class="fund-check">✓</span></strong>
-          <span>Local &amp; global outreach</span>
-        </button>
-        <button type="button" class="fund-btn" onclick="setFund('Shepherds Care Foundation', this)">
-          <strong>Shepherds Care Foundation <span class="fund-check">✓</span></strong>
-          <span>Community welfare</span>
-        </button>
-        <button type="button" class="fund-btn" onclick="setFund('Where Most Needed', this)">
-          <strong>Where Most Needed <span class="fund-check">✓</span></strong>
-          <span>Unrestricted gift</span>
-        </button>
-        <button type="button" class="fund-btn" onclick="setFund('Youth & Children', this)">
-          <strong>Youth &amp; Children <span class="fund-check">✓</span></strong>
-          <span>Next generation ministry</span>
-        </button>
-      </div>
-
-      <!-- PAYMENT METHOD -->
-      <h2 class="give-section-title">Payment Method</h2>
-      <div class="method-grid">
-        <button type="button" class="method-btn active" onclick="setMethod('bank', this)">
-          <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-          <span>Bank Transfer</span>
-        </button>
-        <button type="button" class="method-btn" onclick="setMethod('paypal', this)">
-          <svg viewBox="0 0 16 16"><path d="M3.16 13.5a.5.5 0 0 1-.486-.373l-1.66-6.625a.5.5 0 0 1 .486-.627H13a.5.5 0 0 1 .5.5v.5a.5.5 0 0 1-.5.5H2.5l1.25 5h8.5a.5.5 0 0 1 0 1h-9.09z"/><path fill-rule="evenodd" d="M.5 1h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1z"/></svg>
-          <span>PayPal</span>
-        </button>
-      </div>
-
-      <!-- DONOR INFO -->
-      <h2 class="give-section-title">Your Information</h2>
+      <!-- PARTNER INFO -->
+      <h2 class="give-section-title" style="margin-top:32px">Your Information</h2>
       <div class="field-row">
         <div>
           <label>First Name</label>
-          <input type="text" placeholder="John" required>
+          <input id="p-first" type="text" placeholder="John" required>
         </div>
         <div>
           <label>Last Name</label>
-          <input type="text" placeholder="Doe" required>
+          <input id="p-last" type="text" placeholder="Doe" required>
         </div>
       </div>
       <div class="field-group">
         <label>Email Address</label>
-        <input type="email" placeholder="john@example.com" required>
+        <input id="p-email" type="email" placeholder="john@example.com" required>
       </div>
       <div class="field-group">
         <label>Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
-        <input type="tel" placeholder="+1 (408) 000-0000">
+        <input id="p-phone" type="tel" placeholder="+1 (408) 000-0000">
+      </div>
+      <div class="field-group">
+        <label>Address <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
+        <input id="p-address" type="text" placeholder="123 Main St, San Jose, CA">
       </div>
 
-      <p class="give-note">Your contribution is tax-deductible. A receipt will be sent to your email address. All payments are processed securely.</p>
+      <p class="give-note">By submitting this form you are making a monthly pledge commitment to RCCG Jesus House Silicon Valley. The church team will follow up with you to complete your giving setup. Your information is kept confidential.</p>
 
       <button type="submit" class="give-submit-btn" id="submitBtn">
-        <span>Give <span id="giveAmountLabel">$100</span> Now</span>
+        <span>Submit My Partnership — <span id="giveAmountLabel">$250</span>/mo</span>
         <svg viewBox="0 0 16 16" fill="currentColor" style="width:16px;height:16px"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
       </button>
-      <div class="secure-note">
-        <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
-        Secure &amp; encrypted · SSL protected
-      </div>
     </form>
 
     <div class="success-panel" id="successPanel">
       <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
-      <h2>Thank You for Your Generosity!</h2>
-      <p>Your gift has been received. A confirmation and tax receipt will be sent to your email. May God bless you abundantly for your faithfulness.</p>
+      <h2>Welcome, Partner!</h2>
+      <p>Thank you for your commitment. Your partnership form has been received and a member of our team will be in touch shortly to complete your giving setup. God bless you!</p>
       <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Back to Home</a>
     </div>
   </div>
@@ -303,18 +255,18 @@
   <!-- SIDEBAR -->
   <aside class="give-sidebar">
 
-    <!-- WAYS TO GIVE -->
+    <!-- ZELLE FEATURED -->
+    <div class="zelle-card">
+      <p class="zelle-card-tag">Quickest Way to Give</p>
+      <p class="zelle-card-title">Give via Zelle</p>
+      <p class="zelle-card-note">Open your banking app, select Zelle, and send to:</p>
+      <div class="zelle-card-email">rccgjhsv2013@gmail.com</div>
+      <p class="zelle-card-note">Please include your <strong style="color:rgba(255,255,255,0.85)">full name</strong> and <strong style="color:rgba(255,255,255,0.85)">purpose</strong> (e.g. "Tithe — John Doe") in the note. No account sign-up required.</p>
+    </div>
+
+    <!-- OTHER WAYS -->
     <div class="sidebar-card">
       <h3 class="sidebar-card-title">Other Ways to Give</h3>
-      <div class="sidebar-item">
-        <div class="sidebar-icon">
-          <svg viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2zm3.708 6.208L1 11.105V5.383l4.708 2.825zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2z"/></svg>
-        </div>
-        <div>
-          <div class="sidebar-item-title">Mail a Cheque</div>
-          <div class="sidebar-item-desc">Make payable to <strong>RCCG Jesus House Silicon Valley</strong> and mail to 474 Piercy Rd, San Jose, CA 95138.</div>
-        </div>
-      </div>
       <div class="sidebar-item">
         <div class="sidebar-icon">
           <svg viewBox="0 0 16 16"><path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1H1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/><path fill-rule="evenodd" d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V5zm3 4a3 3 0 1 0 6 0 3 3 0 0 0-6 0zm7.5-2a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2zm0 2a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2z"/></svg>
@@ -326,11 +278,11 @@
       </div>
       <div class="sidebar-item">
         <div class="sidebar-icon">
-          <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+          <svg viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2zm3.708 6.208L1 11.105V5.383l4.708 2.825zM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2z"/></svg>
         </div>
         <div>
-          <div class="sidebar-item-title">Bank Transfer (Zelle)</div>
-          <div class="sidebar-item-desc">Send directly via Zelle to <strong>rccgjhsv2013@gmail.com</strong>. Please include your name and fund designation in the note.</div>
+          <div class="sidebar-item-title">Mail a Cheque</div>
+          <div class="sidebar-item-desc">Payable to <strong>RCCG Jesus House Silicon Valley</strong> · 474 Piercy Rd, San Jose, CA 95138.</div>
         </div>
       </div>
     </div>
@@ -346,20 +298,14 @@
       </div>
       <div class="sidebar-item">
         <div>
-          <div class="sidebar-item-title">Is it secure?</div>
-          <div class="sidebar-item-desc">All online transactions are encrypted with SSL and processed through a PCI-compliant payment gateway.</div>
-        </div>
-      </div>
-      <div class="sidebar-item">
-        <div>
-          <div class="sidebar-item-title">Can I manage recurring gifts?</div>
-          <div class="sidebar-item-desc">Yes. After your first gift you'll receive login details to manage, pause, or cancel your recurring giving at any time.</div>
+          <div class="sidebar-item-title">What is a Church Partner?</div>
+          <div class="sidebar-item-desc">A partner is someone who makes a regular monthly financial commitment to support the church's ministry and mission.</div>
         </div>
       </div>
       <div class="sidebar-item">
         <div>
           <div class="sidebar-item-title">Questions?</div>
-          <div class="sidebar-item-desc">Contact us at <strong>give@rccgjhsv.org</strong> or speak to an usher on Sunday.</div>
+          <div class="sidebar-item-desc">Contact us at <strong>rccgjhsv2013@gmail.com</strong> or speak to an usher on Sunday.</div>
         </div>
       </div>
     </div>
@@ -368,62 +314,62 @@
 </div>
 
 <script>
-  let selectedAmount = 100;
-  let selectedFreq = 'one-time';
-  let selectedFund = 'Tithes & Offerings';
-  let selectedMethod = 'card';
-
-  function setFreq(freq, btn) {
-    selectedFreq = freq;
-    document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
+  let selectedAmount = 250;
 
   function setAmount(amount, btn) {
-    selectedAmount = amount;
     document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('customAmount').value = '';
+    const customWrap = document.getElementById('customWrap');
+    if (amount === 0) {
+      customWrap.style.display = 'block';
+      selectedAmount = parseFloat(document.getElementById('customAmount').value) || 0;
+    } else {
+      customWrap.style.display = 'none';
+      selectedAmount = amount;
+    }
     updateLabel();
   }
 
-  function clearPreset() {
-    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
+  function updateCustom() {
     selectedAmount = parseFloat(document.getElementById('customAmount').value) || 0;
     updateLabel();
   }
 
-  function setFund(fund, btn) {
-    selectedFund = fund;
-    document.querySelectorAll('.fund-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
-  function setMethod(method, btn) {
-    selectedMethod = method;
-    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-  }
-
   function updateLabel() {
-    const label = selectedAmount > 0 ? '$' + selectedAmount.toLocaleString() : 'Now';
-    document.getElementById('giveAmountLabel').textContent = label;
+    const label = selectedAmount > 0 ? '$' + selectedAmount.toLocaleString() : '—';
+    document.getElementById('giveAmountLabel').textContent = label + '/mo';
   }
 
-  function handleGive(e) {
+  document.getElementById('partnerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    document.getElementById('giveForm').style.display = 'none';
+    const btn = document.getElementById('submitBtn');
+    const first = document.getElementById('p-first').value.trim();
+    const last = document.getElementById('p-last').value.trim();
+    const email = document.getElementById('p-email').value.trim();
+    const phone = document.getElementById('p-phone').value.trim();
+    const address = document.getElementById('p-address').value.trim();
+    if (!first || !email) { alert('Please enter your name and email.'); return; }
+    const amount = selectedAmount > 0 ? '$' + selectedAmount.toLocaleString() + '/month' : 'Not specified';
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    try {
+      await fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `New Church Partner: ${first} ${last} — ${amount}`,
+          name: `${first} ${last}`,
+          email,
+          phone: phone || 'Not provided',
+          address: address || 'Not provided',
+          monthly_pledge: amount
+        })
+      });
+    } catch(e) { /* fail silently */ }
+    btn.disabled = false;
+    document.getElementById('partnerForm').style.display = 'none';
     document.getElementById('successPanel').style.display = 'block';
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Scroll to section from URL hash
-  window.addEventListener('DOMContentLoaded', () => {
-    if (window.location.hash === '#recurring') {
-      document.querySelectorAll('.freq-btn').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.freq-btn')[2].classList.add('active');
-      selectedFreq = 'monthly';
-    }
   });
 </script>
 
