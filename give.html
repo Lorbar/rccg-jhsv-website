@@ -48,18 +48,9 @@
   .give-layout { max-width: 1100px; margin: 0 auto; padding: 72px 80px; display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: start; }
 
   /* FORM SIDE */
-  .give-form-wrap { }
-
   .give-section-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--off-black); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); }
 
-  /* PARTNER INTRO */
-  .partner-intro { margin-bottom: 36px; padding: 28px; background: linear-gradient(135deg, var(--gold-dark), var(--gold)); border-radius: 8px; color: #fff; }
-  .partner-intro-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 10px; }
-  .partner-intro h2 { font-family: var(--serif); font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 12px; line-height: 1.2; }
-  .partner-intro h2 em { font-style: italic; color: rgba(255,255,255,0.85); }
-  .partner-intro p { font-size: 14px; color: rgba(255,255,255,0.82); line-height: 1.7; }
-
-  /* AMOUNT GRID */
+  /* AMOUNT */
   .amount-label { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mid); margin-bottom: 12px; display: block; }
   .amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
   .amount-btn { padding: 16px 8px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
@@ -81,8 +72,6 @@
   .fund-btn span { font-size: 11px; font-weight: 400; color: #888; }
   .fund-btn:hover { border-color: var(--gold); }
   .fund-btn.active { border-color: var(--gold); background: #F0E5FA; }
-  .fund-btn.active .fund-check { display: block; }
-  .fund-check { display: none; float: right; color: var(--gold); font-size: 14px; }
 
   /* PAYMENT METHOD */
   .method-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 32px; }
@@ -116,7 +105,6 @@
     transition: background 0.2s; display: flex; align-items: center; justify-content: center; gap: 10px;
   }
   .give-submit-btn:hover { background: var(--gold-dark); }
-  .give-submit-btn .summary { font-size: 12px; opacity: 0.75; font-weight: 400; text-transform: none; letter-spacing: 0; }
 
   .secure-note { display: flex; align-items: center; gap: 8px; justify-content: center;
     margin-top: 14px; font-size: 12px; color: #aaa; }
@@ -147,7 +135,35 @@
   .zelle-card-email { font-size: 18px; font-weight: 700; color: var(--gold-light); letter-spacing: 0.02em; margin: 14px 0; padding: 12px 16px; background: rgba(123,63,160,0.25); border-radius: 4px; word-break: break-all; }
   .zelle-card-note { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
-  /* PARTNER anchor */
+  /* PARTNERSHIP SECTION */
+  .partner-section {
+    background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 96px 80px;
+  }
+  .partner-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 540px; gap: 80px; align-items: start; }
+  .partner-intro-col { }
+  .partner-section-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-light); margin-bottom: 14px; }
+  .partner-section-title { font-family: var(--serif); font-size: clamp(32px, 3vw, 48px); font-weight: 700; color: #fff; line-height: 1.15; margin-bottom: 20px; }
+  .partner-section-title em { font-style: italic; color: var(--gold-light); }
+  .partner-section-desc { font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 28px; }
+  .partner-amounts-preview { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+  .partner-amount-chip { padding: 8px 18px; background: rgba(123,63,160,0.25); border: 1px solid rgba(123,63,160,0.4); border-radius: 20px; font-family: var(--serif); font-size: 15px; font-weight: 700; color: var(--gold-light); }
+  .partner-benefit { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+  .partner-benefit svg { width: 16px; height: 16px; fill: var(--gold-light); flex-shrink: 0; margin-top: 2px; }
+  .partner-benefit-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+
+  /* PARTNER FORM */
+  .partner-form-wrap { background: var(--off-white); border-radius: 8px; padding: 40px; }
+  .partner-form-title { font-family: var(--serif); font-size: 22px; font-weight: 700; color: var(--off-black); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 2px solid var(--gold); }
+
+  .partner-amount-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+  .p-amount-btn { padding: 14px 8px; background: #fff; border: 1px solid rgba(0,0,0,0.1); border-radius: 4px;
+    font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--off-black);
+    cursor: pointer; transition: all 0.15s; text-align: center; }
+  .p-amount-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .p-amount-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+  /* anchor */
   #partner { scroll-margin-top: 90px; }
 
   @media (max-width: 960px) {
@@ -156,6 +172,9 @@
     .give-layout { grid-template-columns: 1fr; padding: 48px 24px; gap: 40px; }
     .amount-grid { grid-template-columns: repeat(3, 1fr); }
     .field-row { grid-template-columns: 1fr; }
+    .partner-section { padding: 64px 24px; }
+    .partner-inner { grid-template-columns: 1fr; gap: 48px; }
+    .partner-form-wrap { padding: 28px 20px; }
   }
 </style>
 </head>
@@ -182,74 +201,119 @@
   </blockquote>
 </div>
 
+<!-- MAIN GIVING FORM -->
 <div class="give-layout">
 
-  <!-- PARTNER FORM -->
-  <div class="give-form-wrap" id="partner">
+  <div class="give-form-wrap">
 
-    <div class="partner-intro">
-      <p class="partner-intro-tag">Monthly Partnership</p>
-      <h2>Become a <em>Church Partner</em></h2>
-      <p>Partners are the heartbeat of our ministry. By making a monthly commitment, you join a community of faithful givers whose consistent generosity keeps the work of God moving forward — funding worship, outreach, care, and the next generation. Every month, your pledge makes a real difference.</p>
-    </div>
-
-    <form id="partnerForm">
+    <form id="giveForm">
 
       <!-- AMOUNT -->
-      <h2 class="give-section-title">Monthly Pledge Amount</h2>
-      <span class="amount-label">Select your monthly commitment</span>
+      <h2 class="give-section-title">Giving Amount</h2>
+      <span class="amount-label">Select or enter an amount</span>
       <div class="amount-grid">
-        <button type="button" class="amount-btn" onclick="setAmount(200, this)">$200</button>
-        <button type="button" class="amount-btn active" onclick="setAmount(250, this)">$250</button>
-        <button type="button" class="amount-btn" onclick="setAmount(300, this)">$300</button>
-        <button type="button" class="amount-btn" onclick="setAmount(500, this)">$500</button>
-        <button type="button" class="amount-btn" onclick="setAmount(1000, this)">$1,000</button>
-        <button type="button" class="amount-btn" onclick="setAmount(0, this)" id="aboveBtn">Above</button>
+        <button type="button" class="amount-btn" onclick="setGiveAmount(20, this)">$20</button>
+        <button type="button" class="amount-btn" onclick="setGiveAmount(50, this)">$50</button>
+        <button type="button" class="amount-btn active" onclick="setGiveAmount(100, this)">$100</button>
+        <button type="button" class="amount-btn" onclick="setGiveAmount(200, this)">$200</button>
+        <button type="button" class="amount-btn" onclick="setGiveAmount(500, this)">$500</button>
+        <button type="button" class="amount-btn" onclick="setGiveAmount(0, this)">Other</button>
       </div>
-      <div class="custom-amount-wrap" id="customWrap" style="display:none">
+      <div class="custom-amount-wrap" id="giveCustomWrap" style="display:none">
         <span>$</span>
-        <input type="number" class="custom-amount-input" id="customAmount" placeholder="Enter monthly amount" min="1" oninput="updateCustom()">
+        <input type="number" class="custom-amount-input" id="giveCustomAmount" placeholder="Enter amount" min="1" oninput="updateGiveCustom()">
       </div>
 
-      <!-- PARTNER INFO -->
-      <h2 class="give-section-title" style="margin-top:32px">Your Information</h2>
+      <!-- FUND -->
+      <h2 class="give-section-title" style="margin-top:8px">Giving Category</h2>
+      <div class="fund-grid">
+        <button type="button" class="fund-btn active" id="fund-tithe" onclick="selectFund('Tithe', this)">
+          Tithe<span>My 10% covenant giving</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="selectFund('Sunday Offering', this)">
+          Sunday Offering<span>Weekly worship offering</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="selectFund('Building Fund', this)">
+          Building Fund<span>House of worship project</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="selectFund('Missions & Outreach', this)">
+          Missions &amp; Outreach<span>Reaching our community</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="selectFund("Women's Ministry", this)">
+          Women's Ministry<span>Triumphant Women</span>
+        </button>
+        <button type="button" class="fund-btn" onclick="selectFund('General Fund', this)">
+          General Fund<span>Where most needed</span>
+        </button>
+      </div>
+
+      <!-- PAYMENT METHOD -->
+      <h2 class="give-section-title">Payment Method</h2>
+      <div class="method-grid">
+        <button type="button" class="method-btn active" id="method-bank" onclick="selectMethod('Bank Transfer', this)">
+          <svg viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2zm6 7a2 2 0 1 1 0-4 2 2 0 0 1 0 4z"/></svg>
+          <span>Bank Transfer</span>
+        </button>
+        <button type="button" class="method-btn" onclick="selectMethod('PayPal', this)">
+          <svg viewBox="0 0 16 16"><path d="M14.06 3.713c.12-1.071-.093-1.832-.702-2.526C12.628.356 11.312 0 9.626 0H4.734a.7.7 0 0 0-.691.59L2.005 13.509a.42.42 0 0 0 .415.486h2.756l-.202 1.28a.368.368 0 0 0 .36.42h2.508c.316 0 .584-.227.635-.539l.026-.143.504-3.187.032-.177c.05-.312.32-.539.635-.539h.399c2.superstars594 0 4.623-1.046 5.215-4.073.247-1.26.12-2.31-.534-3.049a2.658 2.658 0 0 0-.757-.513z"/></svg>
+          <span>PayPal</span>
+        </button>
+      </div>
+
+      <!-- FREQUENCY -->
+      <h2 class="give-section-title">Frequency</h2>
+      <div class="field-group" style="margin-bottom:32px">
+        <select id="g-frequency">
+          <option value="One-time">One-time gift</option>
+          <option value="Weekly">Weekly</option>
+          <option value="Monthly">Monthly</option>
+          <option value="Quarterly">Quarterly</option>
+          <option value="Annually">Annually</option>
+        </select>
+      </div>
+
+      <!-- DONOR INFO -->
+      <h2 class="give-section-title">Your Information</h2>
       <div class="field-row">
         <div>
           <label>First Name</label>
-          <input id="p-first" type="text" placeholder="John" required>
+          <input id="g-first" type="text" placeholder="John" required>
         </div>
         <div>
           <label>Last Name</label>
-          <input id="p-last" type="text" placeholder="Doe" required>
+          <input id="g-last" type="text" placeholder="Doe" required>
         </div>
       </div>
       <div class="field-group">
         <label>Email Address</label>
-        <input id="p-email" type="email" placeholder="john@example.com" required>
+        <input id="g-email" type="email" placeholder="john@example.com" required>
       </div>
       <div class="field-group">
         <label>Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
-        <input id="p-phone" type="tel" placeholder="+1 (408) 000-0000">
-      </div>
-      <div class="field-group">
-        <label>Address <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
-        <input id="p-address" type="text" placeholder="123 Main St, San Jose, CA">
+        <input id="g-phone" type="tel" placeholder="+1 (408) 000-0000">
       </div>
 
-      <p class="give-note">By submitting this form you are making a monthly pledge commitment to RCCG Jesus House Silicon Valley. The church team will follow up with you to complete your giving setup. Your information is kept confidential.</p>
+      <p class="give-note">After submitting, our team will contact you with instructions to complete your gift via your chosen payment method. Your information is kept confidential.</p>
 
-      <button type="submit" class="give-submit-btn" id="submitBtn">
-        <span>Submit My Partnership — <span id="giveAmountLabel">$250</span>/mo</span>
+      <button type="submit" class="give-submit-btn" id="giveSubmitBtn">
+        <span id="giveBtnLabel">Give $100 — Tithe</span>
         <svg viewBox="0 0 16 16" fill="currentColor" style="width:16px;height:16px"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
       </button>
+
+      <div class="secure-note">
+        <svg viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+        Your information is safe and never shared.
+      </div>
+
     </form>
 
-    <div class="success-panel" id="successPanel">
+    <div class="success-panel" id="giveSuccessPanel">
       <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
-      <h2>Welcome, Partner!</h2>
-      <p>Thank you for your commitment. Your partnership form has been received and a member of our team will be in touch shortly to complete your giving setup. God bless you!</p>
+      <h2>Thank You!</h2>
+      <p>Your giving notification has been received. A member of our team will be in touch with payment instructions shortly. God bless you!</p>
       <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Back to Home</a>
     </div>
+
   </div>
 
   <!-- SIDEBAR -->
@@ -261,7 +325,7 @@
       <p class="zelle-card-title">Give via Zelle</p>
       <p class="zelle-card-note">Open your banking app, select Zelle, and send to:</p>
       <div class="zelle-card-email">rccgjhsv2013@gmail.com</div>
-      <p class="zelle-card-note">Please include your <strong style="color:rgba(255,255,255,0.85)">full name</strong> and <strong style="color:rgba(255,255,255,0.85)">purpose</strong> (e.g. "Tithe — John Doe") in the note. No account sign-up required.</p>
+      <p class="zelle-card-note">Include your <strong style="color:rgba(255,255,255,0.85)">full name</strong> and <strong style="color:rgba(255,255,255,0.85)">purpose</strong> (e.g. "Tithe — John Doe") in the note.</p>
     </div>
 
     <!-- OTHER WAYS -->
@@ -299,7 +363,7 @@
       <div class="sidebar-item">
         <div>
           <div class="sidebar-item-title">What is a Church Partner?</div>
-          <div class="sidebar-item-desc">A partner is someone who makes a regular monthly financial commitment to support the church's ministry and mission.</div>
+          <div class="sidebar-item-desc">A partner makes a monthly financial commitment to support the church's ongoing ministry and mission. See the section below.</div>
         </div>
       </div>
       <div class="sidebar-item">
@@ -313,43 +377,214 @@
   </aside>
 </div>
 
-<script>
-  let selectedAmount = 250;
+<!-- PARTNERSHIP SECTION (ADDENDUM) -->
+<section class="partner-section" id="partner">
+  <div class="partner-inner">
 
-  function setAmount(amount, btn) {
+    <!-- LEFT: INFO -->
+    <div class="partner-intro-col">
+      <p class="partner-section-tag">Monthly Partnership</p>
+      <h2 class="partner-section-title">Become a <em>Church Partner</em></h2>
+      <p class="partner-section-desc">Partners are the heartbeat of our ministry. By making a monthly commitment, you join a community of faithful givers whose consistent generosity keeps the work of God moving forward — funding worship, outreach, care, and the next generation.</p>
+      <p class="partner-section-desc">Every month, your pledge makes a real difference in this city and beyond.</p>
+      <div class="partner-amounts-preview">
+        <span class="partner-amount-chip">$200</span>
+        <span class="partner-amount-chip">$250</span>
+        <span class="partner-amount-chip">$300</span>
+        <span class="partner-amount-chip">$500</span>
+        <span class="partner-amount-chip">$1,000+</span>
+      </div>
+      <div class="partner-benefit">
+        <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+        <div class="partner-benefit-text">Regular, predictable support that enables long-term ministry planning.</div>
+      </div>
+      <div class="partner-benefit">
+        <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+        <div class="partner-benefit-text">A personal acknowledgement and ongoing connection with church leadership.</div>
+      </div>
+      <div class="partner-benefit">
+        <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+        <div class="partner-benefit-text">Annual tax receipt confirming all your contributions for the year.</div>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="partner-form-wrap">
+
+      <form id="partnerForm">
+
+        <h2 class="partner-form-title">Partner Registration</h2>
+
+        <span class="amount-label" style="margin-bottom:10px;display:block">Monthly pledge amount</span>
+        <div class="partner-amount-grid" style="margin-bottom:16px">
+          <button type="button" class="p-amount-btn" onclick="setPAmount(200, this)">$200</button>
+          <button type="button" class="p-amount-btn active" onclick="setPAmount(250, this)">$250</button>
+          <button type="button" class="p-amount-btn" onclick="setPAmount(300, this)">$300</button>
+          <button type="button" class="p-amount-btn" onclick="setPAmount(500, this)">$500</button>
+          <button type="button" class="p-amount-btn" onclick="setPAmount(1000, this)">$1,000</button>
+          <button type="button" class="p-amount-btn" onclick="setPAmount(0, this)">Above</button>
+        </div>
+        <div class="custom-amount-wrap" id="pCustomWrap" style="display:none">
+          <span>$</span>
+          <input type="number" class="custom-amount-input" id="pCustomAmount" placeholder="Monthly amount" min="1" oninput="updatePCustom()" style="font-size:18px">
+        </div>
+
+        <div class="field-row" style="margin-top:8px">
+          <div>
+            <label>First Name</label>
+            <input id="p-first" type="text" placeholder="John" required>
+          </div>
+          <div>
+            <label>Last Name</label>
+            <input id="p-last" type="text" placeholder="Doe" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label>Email Address</label>
+          <input id="p-email" type="email" placeholder="john@example.com" required>
+        </div>
+        <div class="field-group">
+          <label>Phone <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
+          <input id="p-phone" type="tel" placeholder="+1 (408) 000-0000">
+        </div>
+        <div class="field-group">
+          <label>Address <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#aaa;font-size:11px">(optional)</span></label>
+          <input id="p-address" type="text" placeholder="123 Main St, San Jose, CA">
+        </div>
+
+        <p class="give-note">By submitting you are making a monthly pledge commitment. Our team will follow up to complete your giving setup. Your information is kept confidential.</p>
+
+        <button type="submit" class="give-submit-btn" id="pSubmitBtn">
+          <span>Submit — <span id="pAmountLabel">$250</span>/mo</span>
+          <svg viewBox="0 0 16 16" fill="currentColor" style="width:16px;height:16px"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/></svg>
+        </button>
+      </form>
+
+      <div class="success-panel" id="partnerSuccessPanel">
+        <svg viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/></svg>
+        <h2>Welcome, Partner!</h2>
+        <p>Thank you for your commitment. Your form has been received and a member of our team will be in touch shortly. God bless you!</p>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:#fff;text-decoration:none;padding:14px 28px;border-radius:4px;font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Back to Home</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  /* ===== MAIN GIVE FORM ===== */
+  let giveAmount = 100;
+  let giveFund = 'Tithe';
+  let giveMethod = 'Bank Transfer';
+
+  function setGiveAmount(amount, btn) {
     document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    const customWrap = document.getElementById('customWrap');
+    const wrap = document.getElementById('giveCustomWrap');
     if (amount === 0) {
-      customWrap.style.display = 'block';
-      selectedAmount = parseFloat(document.getElementById('customAmount').value) || 0;
+      wrap.style.display = 'block';
+      giveAmount = parseFloat(document.getElementById('giveCustomAmount').value) || 0;
     } else {
-      customWrap.style.display = 'none';
-      selectedAmount = amount;
+      wrap.style.display = 'none';
+      giveAmount = amount;
     }
-    updateLabel();
+    updateGiveBtn();
   }
 
-  function updateCustom() {
-    selectedAmount = parseFloat(document.getElementById('customAmount').value) || 0;
-    updateLabel();
+  function updateGiveCustom() {
+    giveAmount = parseFloat(document.getElementById('giveCustomAmount').value) || 0;
+    updateGiveBtn();
   }
 
-  function updateLabel() {
-    const label = selectedAmount > 0 ? '$' + selectedAmount.toLocaleString() : '—';
-    document.getElementById('giveAmountLabel').textContent = label + '/mo';
+  function selectFund(fund, btn) {
+    document.querySelectorAll('.fund-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    giveFund = fund;
+    updateGiveBtn();
+  }
+
+  function selectMethod(method, btn) {
+    document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    giveMethod = method;
+  }
+
+  function updateGiveBtn() {
+    const amtStr = giveAmount > 0 ? '$' + giveAmount.toLocaleString() : '—';
+    document.getElementById('giveBtnLabel').textContent = 'Give ' + amtStr + ' — ' + giveFund;
+  }
+
+  document.getElementById('giveForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('giveSubmitBtn');
+    const first = document.getElementById('g-first').value.trim();
+    const last = document.getElementById('g-last').value.trim();
+    const email = document.getElementById('g-email').value.trim();
+    const phone = document.getElementById('g-phone').value.trim();
+    const frequency = document.getElementById('g-frequency').value;
+    if (!first || !email) { alert('Please enter your name and email.'); return; }
+    const amount = giveAmount > 0 ? '$' + giveAmount.toLocaleString() : 'Not specified';
+    btn.textContent = 'Submitting…';
+    btn.disabled = true;
+    try {
+      await fetch('https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `New Giving Notification: ${first} ${last} — ${amount} (${giveFund})`,
+          name: first + ' ' + last,
+          email,
+          phone: phone || 'Not provided',
+          amount,
+          fund: giveFund,
+          payment_method: giveMethod,
+          frequency
+        })
+      });
+    } catch(err) { /* fail silently */ }
+    btn.disabled = false;
+    document.getElementById('giveForm').style.display = 'none';
+    document.getElementById('giveSuccessPanel').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ===== PARTNER FORM ===== */
+  let pAmount = 250;
+
+  function setPAmount(amount, btn) {
+    document.querySelectorAll('.p-amount-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const wrap = document.getElementById('pCustomWrap');
+    if (amount === 0) {
+      wrap.style.display = 'block';
+      pAmount = parseFloat(document.getElementById('pCustomAmount').value) || 0;
+    } else {
+      wrap.style.display = 'none';
+      pAmount = amount;
+    }
+    updatePLabel();
+  }
+
+  function updatePCustom() {
+    pAmount = parseFloat(document.getElementById('pCustomAmount').value) || 0;
+    updatePLabel();
+  }
+
+  function updatePLabel() {
+    const str = pAmount > 0 ? '$' + pAmount.toLocaleString() : '—';
+    document.getElementById('pAmountLabel').textContent = str;
   }
 
   document.getElementById('partnerForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    const btn = document.getElementById('submitBtn');
+    const btn = document.getElementById('pSubmitBtn');
     const first = document.getElementById('p-first').value.trim();
     const last = document.getElementById('p-last').value.trim();
     const email = document.getElementById('p-email').value.trim();
     const phone = document.getElementById('p-phone').value.trim();
     const address = document.getElementById('p-address').value.trim();
     if (!first || !email) { alert('Please enter your name and email.'); return; }
-    const amount = selectedAmount > 0 ? '$' + selectedAmount.toLocaleString() + '/month' : 'Not specified';
+    const amount = pAmount > 0 ? '$' + pAmount.toLocaleString() + '/month' : 'Not specified';
     btn.textContent = 'Submitting…';
     btn.disabled = true;
     try {
@@ -358,18 +593,17 @@
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           _subject: `New Church Partner: ${first} ${last} — ${amount}`,
-          name: `${first} ${last}`,
+          name: first + ' ' + last,
           email,
           phone: phone || 'Not provided',
           address: address || 'Not provided',
           monthly_pledge: amount
         })
       });
-    } catch(e) { /* fail silently */ }
+    } catch(err) { /* fail silently */ }
     btn.disabled = false;
     document.getElementById('partnerForm').style.display = 'none';
-    document.getElementById('successPanel').style.display = 'block';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('partnerSuccessPanel').style.display = 'block';
   });
 </script>
 
